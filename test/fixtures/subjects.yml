@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  code: 
+  professor: 1
+  student: 
+  schedule: 2020-03-20 18:23:03
+  ideal_year: 1
+
+two:
+  description: MyString
+  code: 
+  professor: 1
+  student: 
+  schedule: 2020-03-20 18:23:03
+  ideal_year: 1
