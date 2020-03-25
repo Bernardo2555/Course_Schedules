@@ -1,0 +1,63 @@
+<h1>Seja Bem-Vindo!!</h1>
+<p> Data <%= br_date(Date.today) %></p>
+<ul>
+    <li>
+        <%= link_to "Cadastro de estudantes", students_path %>
+    </li>
+</ul>
+
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/editor.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="narrow-jumbotron.css" rel="stylesheet">
+  </head>
+
+<body>
+    <table width="1500">
+        <td>
+            <div class="col-sm-4">
+              <h3>
+              	<img src="https://bootsnipp.com/bootstrap-builder/libs/builder/icons/image.svg" height="128" width="128" style="">	
+              </h3>
+            </div>
+        </td>
+        <td>
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-12 control-label" for="textinput">Usuário</label>  
+              <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" class="form-control input-md"> 
+              </div>
+            </div>
+
+            <!-- Password input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="passwordinput">Senha</label>
+              <div class="col-md-4">
+                <input id="passwordinput" name="passwordinput" type="password" class="form-control input-md">
+              </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton"></label>
+              <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Entrar</button>
+                </div>
+            </div>
+        </td>
+    </table>
+</body>
+</html>

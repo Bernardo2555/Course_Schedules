@@ -4,7 +4,7 @@ class CreateProfessors < ActiveRecord::Migration[5.2]
       t.string :description
       t.string :email
       t.string :telefon
-      t.primary_key :ar
+      t.integer :ar
       t.time :can_schedule
       t.time :cant_schedule
 
