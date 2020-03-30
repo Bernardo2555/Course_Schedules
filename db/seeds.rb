@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+subjects = ([
+    {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
+])
+
+
+spinner = TTY::Spinner.new("[:spinner] Seeding db...")
+spinner.auto_spin
+
+subjects.each do |subject|
+    Subject.find_or_create_by!(subject)
+end
+
+spinner.success("(Done!)")
