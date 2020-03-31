@@ -12,11 +12,9 @@ namespace :dev do
 
       show_spinner("Migrating db...") do
         %x(rails db:migrate)
-      end
+      end 
 
-      show_spinner("Seeding db...") do
-        %x(rails db:seed)
-      end
+      %x(rails db:seed)
 
     else
       puts "You are not in a development enviroment!"
