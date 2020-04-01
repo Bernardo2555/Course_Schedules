@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_182301) do
+ActiveRecord::Schema.define(version: 2020_04_01_144234) do
 
   create_table "professors", force: :cascade do |t|
     t.string "description"
@@ -37,12 +37,14 @@ ActiveRecord::Schema.define(version: 2020_03_20_182301) do
   create_table "subjects", force: :cascade do |t|
     t.string "description"
     t.integer "code"
-    t.integer "professor"
-    t.integer "student"
     t.time "schedule"
     t.integer "ideal_year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "professor_id"
+    t.integer "student_id"
+    t.index ["professor_id"], name: "index_subjects_on_professor_id"
+    t.index ["student_id"], name: "index_subjects_on_student_id"
   end
 
 end
