@@ -15,10 +15,9 @@ class StudentsTest < ApplicationSystemTestCase
     click_on "New Student"
 
     fill_in "Ar", with: @student.ar
-    fill_in "Depence", with: @student.depence
     fill_in "Description", with: @student.description
     fill_in "Email", with: @student.email
-    fill_in "Telefon", with: @student.telefon
+    fill_in "Telephone", with: @student.telephone
     fill_in "Year", with: @student.year
     click_on "Create Student"
 
@@ -31,10 +30,9 @@ class StudentsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Ar", with: @student.ar
-    fill_in "Depence", with: @student.depence
     fill_in "Description", with: @student.description
     fill_in "Email", with: @student.email
-    fill_in "Telefon", with: @student.telefon
+    fill_in "Telephone", with: @student.telephone
     fill_in "Year", with: @student.year
     click_on "Update Student"
 

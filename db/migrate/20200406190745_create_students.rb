@@ -1,12 +1,10 @@
 class CreateStudents < ActiveRecord::Migration[5.2]
   def change
-    create_table :students do |t|
+    create_table :students, primary_key: :ar do |t|
       t.string :description
       t.string :email
-      t.string :telefon
-      t.integer :ar
+      t.string :telephone
       t.integer :year
-      t.string :depence
 
       t.timestamps
     end

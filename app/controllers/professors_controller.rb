@@ -69,6 +69,6 @@ class ProfessorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def professor_params
-      params.require(:professor).permit(:description, :email, :telefon, :ar, :can_schedule, :cant_schedule)
+      params.require(:professor).permit(:ar, :description, :email, :telephone)
     end
 end

@@ -15,11 +15,9 @@ class ProfessorsTest < ApplicationSystemTestCase
     click_on "New Professor"
 
     fill_in "Ar", with: @professor.ar
-    fill_in "Can schedule", with: @professor.can_schedule
-    fill_in "Cant schedule", with: @professor.cant_schedule
     fill_in "Description", with: @professor.description
     fill_in "Email", with: @professor.email
-    fill_in "Telefon", with: @professor.telefon
+    fill_in "Telephone", with: @professor.telephone
     click_on "Create Professor"
 
     assert_text "Professor was successfully created"
@@ -31,11 +29,9 @@ class ProfessorsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Ar", with: @professor.ar
-    fill_in "Can schedule", with: @professor.can_schedule
-    fill_in "Cant schedule", with: @professor.cant_schedule
     fill_in "Description", with: @professor.description
     fill_in "Email", with: @professor.email
-    fill_in "Telefon", with: @professor.telefon
+    fill_in "Telephone", with: @professor.telephone
     click_on "Update Professor"
 
     assert_text "Professor was successfully updated"

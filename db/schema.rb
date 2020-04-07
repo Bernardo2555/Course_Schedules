@@ -10,50 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_172941) do
+ActiveRecord::Schema.define(version: 2020_04_06_192640) do
 
-  create_table "grades", force: :cascade do |t|
-    t.integer "subject_id"
-    t.integer "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["student_id"], name: "index_grades_on_student_id"
-    t.index ["subject_id"], name: "index_grades_on_subject_id"
-  end
-
-  create_table "professors", force: :cascade do |t|
+  create_table "courses", primary_key: "code", force: :cascade do |t|
     t.string "description"
-    t.string "email"
-    t.string "telefon"
-    t.integer "ar"
-    t.time "can_schedule"
-    t.time "cant_schedule"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string "description"
-    t.string "email"
-    t.string "telefon"
-    t.integer "ar"
-    t.integer "year"
-    t.string "depence"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "subjects", force: :cascade do |t|
-    t.string "description"
-    t.integer "code"
-    t.time "schedule"
     t.integer "ideal_year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "professors", primary_key: "ar", force: :cascade do |t|
+    t.string "description"
+    t.string "email"
+    t.string "telephone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
     t.integer "professor_id"
-    t.integer "student_id"
-    t.index ["professor_id"], name: "index_subjects_on_professor_id"
-    t.index ["student_id"], name: "index_subjects_on_student_id"
+    t.integer "course_id"
+    t.string "students"
+    t.string "weekday"
+    t.time "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_schedules_on_course_id"
+    t.index ["professor_id"], name: "index_schedules_on_professor_id"
+  end
+
+  create_table "students", primary_key: "ar", force: :cascade do |t|
+    t.string "description"
+    t.string "email"
+    t.string "telephone"
+    t.integer "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

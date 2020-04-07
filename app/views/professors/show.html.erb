@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Ar:</strong>
+  <%= @professor.ar %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @professor.description %>
 </p>
@@ -11,23 +16,8 @@
 </p>
 
 <p>
-  <strong>Telefon:</strong>
-  <%= @professor.telefon %>
-</p>
-
-<p>
-  <strong>Ar:</strong>
-  <%= @professor.ar %>
-</p>
-
-<p>
-  <strong>Can schedule:</strong>
-  <%= @professor.can_schedule %>
-</p>
-
-<p>
-  <strong>Cant schedule:</strong>
-  <%= @professor.cant_schedule %>
+  <strong>Telephone:</strong>
+  <%= @professor.telephone %>
 </p>
 
 <%= link_to 'Edit', edit_professor_path(@professor) %> |

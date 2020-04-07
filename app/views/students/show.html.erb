@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Ar:</strong>
+  <%= @student.ar %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @student.description %>
 </p>
@@ -11,23 +16,13 @@
 </p>
 
 <p>
-  <strong>Telefon:</strong>
-  <%= @student.telefon %>
-</p>
-
-<p>
-  <strong>Ar:</strong>
-  <%= @student.ar %>
+  <strong>Telephone:</strong>
+  <%= @student.telephone %>
 </p>
 
 <p>
   <strong>Year:</strong>
   <%= @student.year %>
-</p>
-
-<p>
-  <strong>Depence:</strong>
-  <%= @student.depence %>
 </p>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |

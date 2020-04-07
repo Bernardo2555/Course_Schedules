@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  # get 'welcome/index'
-  
-  resources :subjects
+  resources :schedules
+  resources :courses
   resources :professors
   resources :students
+  # get 'welcome/index'
+  
   
   root to: 'welcome#index'
   

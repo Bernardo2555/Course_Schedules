@@ -1,13 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  ar: 
+  code: 
   description: MyString
-  email: MyString
-  telephone: MyString
+  ideal_year: 1
 
 two:
-  ar: 
+  code: 
   description: MyString
-  email: MyString
-  telephone: MyString
+  ideal_year: 1

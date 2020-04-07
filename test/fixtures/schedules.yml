@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  professor: one
+  course: one
+  students: MyString
+  weekday: MyString
+  time: 2020-04-06 16:26:40
+
+two:
+  professor: two
+  course: two
+  students: MyString
+  weekday: MyString
+  time: 2020-04-06 16:26:40

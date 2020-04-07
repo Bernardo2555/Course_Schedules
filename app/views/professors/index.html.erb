@@ -5,12 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th>Ar</th>
       <th>Description</th>
       <th>Email</th>
-      <th>Telefon</th>
-      <th>Ar</th>
-      <th>Can schedule</th>
-      <th>Cant schedule</th>
+      <th>Telephone</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,12 +16,10 @@
   <tbody>
     <% @professors.each do |professor| %>
       <tr>
+        <td><%= professor.ar %></td>
         <td><%= professor.description %></td>
         <td><%= professor.email %></td>
-        <td><%= professor.telefon %></td>
-        <td><%= professor.ar %></td>
-        <td><%= professor.can_schedule %></td>
-        <td><%= professor.cant_schedule %></td>
+        <td><%= professor.telephone %></td>
         <td><%= link_to 'Show', professor %></td>
         <td><%= link_to 'Edit', edit_professor_path(professor) %></td>
         <td><%= link_to 'Destroy', professor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
