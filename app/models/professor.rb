@@ -1,3 +1,3 @@
 class Professor < ApplicationRecord
-  has_many :schedule
+  has_many :schedules
 end
