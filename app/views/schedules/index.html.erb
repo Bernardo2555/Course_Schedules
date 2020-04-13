@@ -17,8 +17,8 @@
   <tbody>
     <% @schedules.each do |schedule| %>
       <tr>
-        <td><%= schedule.professor %></td>
-        <td><%= schedule.course %></td>
+        <td><%= Professor.find(schedule.professor_id).description %></td>
+        <td><%= Course.find(schedule.course_id).description %></td>
         <td><%= schedule.students %></td>
         <td><%= schedule.weekday %></td>
         <td><%= schedule.time %></td>

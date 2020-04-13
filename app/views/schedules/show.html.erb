@@ -1,15 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<!--dar um jeito de mostrar o nome do professor-->
 <p>
   <strong>Professor:</strong>
-  <%= @schedule.professor_id %>
+  <%= Professor.find(@schedule.professor_id).description %>
 </p>
 
-<!--o mesmo de professor-->
 <p>
   <strong>Course:</strong>
-  <%= @schedule.course_id %>
+  <%= Course.find(@schedule.course_id).description %>
 </p>
 
 <p>
