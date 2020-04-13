@@ -49,7 +49,7 @@ show_spinner("Seeding courses to db...") do
       {description: 'Programação Orientada a Objetos III', code_c: '2337', ideal_year: '3'},
       {description: 'Redes de Computadores II', code_c: '2338', ideal_year: '3'},
       {description: 'Sistemas Operacionais II', code_c: '2339', ideal_year: '3'},
-      {description: 'Análise e Complexidade ed Algoritmos', code_c: '2340', ideal_year: '3'},
+      {description: 'Análise e Complexidade de Algoritmos', code_c: '2340', ideal_year: '3'},
       {description: 'Computação Natural', code_c: '2341', ideal_year: '3'},
       {description: 'Empreendedorismo', code_c: '2342', ideal_year: '3'},
       {description: 'Paradigmas em Linguagem de Programação', code_c: '2343', ideal_year: '3'},
