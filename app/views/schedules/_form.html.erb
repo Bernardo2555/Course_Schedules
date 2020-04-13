@@ -13,17 +13,17 @@
 
   <div class="field">
     <%= form.label :professor_id %>
-    <%= form.collection_select :professor_id, Professor.order(:description), :ar, :description, include_blank: true %>
+    <%= form.select :professor_id, @professor_options, include_blank: true %>
   </div>
 
   <div class="field">
     <%= form.label :course_id %>
-    <%= form.collection_select :course_id, Course.order(:description), :code_c, :description, include_blank: true %>
+    <%= form.select :course_id, @course_options, include_blank: true %>
   </div>
 
   <div class="field">
     <%= form.label :students %>
-    <%= form.collection_select :students, Student.order(:description), :description, :description, include_blank: true %>
+    <%= form.select :students, @student_options, include_blank: true %>
   </div>
 
   <div class="field">

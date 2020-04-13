@@ -1,5 +1,8 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]
+  before_action :set_professor_options, only: [:new, :create, :edit, :update]
+  before_action :set_course_options, only: [:new, :create, :edit, :update]
+  before_action :set_student_options, only: [:new, :create, :edit, :update]
 
   # GET /schedules
   # GET /schedules.json
@@ -62,13 +65,26 @@ class SchedulesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_schedule
-      @schedule = Schedule.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def schedule_params
-      params.require(:schedule).permit(:professor_id, :course_id, :students, :weekday, :time, :group)
-    end
+  def set_professor_options
+    @professor_options = Professor.all.pluck(:description, :ar)
+  end
+
+  def set_course_options
+    @course_options = Course.all.pluck(:description, :code_c)
+  end
+
+  def set_student_options
+    @student_options = Student.all.pluck(:description, :ar)
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_schedule
+    @schedule = Schedule.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def schedule_params
+    params.require(:schedule).permit(:professor_id, :course_id, :students, :weekday, :time, :group)
+  end
 end
