@@ -1,0 +1,47 @@
+#models translate
+pt-BR:
+  activerecord:
+    models:
+      course: Materia
+      professor: Professor
+      schedule: Aula
+      student: Estudante
+    attributes:
+      course:
+        code_c: Código
+        description: Nome
+        ideal_year: Ano Ideal
+      professor:
+        ar: Resgistro Acadêmico
+        description: Nome
+        email: Email
+        telephone: Telefone
+      schedule:
+        professor_id: Professor
+        professor: Professor
+        course_id: Curso
+        course: Curso
+        student: Estudantes
+        weekday: Dia da semana
+        time: Hora de inicio
+        time_end: Hora de fim
+        group: Turma
+      student:
+        ar: Resgistro Acadêmico
+        description: Nome
+        email: Email
+        telephone: Telefone
+        year: Ano
+
+#view translate
+  links:
+    edit: Editar
+    show: Mostrar
+    delete: Deletar
+    new: Novo
+    back: Voltar
+
+  warnings:
+    error: Algo de errado ocorreu, verificar de a ação é valida!
+    sucess: Sucesso!
+    confirm: Tem certeza q deseja fazer isso?

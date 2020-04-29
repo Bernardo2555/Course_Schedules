@@ -5,10 +5,10 @@
 <table>
   <thead>
     <tr>
-      <th>Ar</th>
-      <th>Description</th>
-      <th>Email</th>
-      <th>Telephone</th>
+      <th><%= @professors.human_attribute_name(:ar) %></th>
+      <th><%= @professors.human_attribute_name(:description) %></th>
+      <th><%= @professors.human_attribute_name(:email) %></th>
+      <th><%= @professors.human_attribute_name(:telephone) %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,9 +20,9 @@
         <td><%= professor.description %></td>
         <td><%= professor.email %></td>
         <td><%= professor.telephone %></td>
-        <td><%= link_to 'Show', professor %></td>
-        <td><%= link_to 'Edit', edit_professor_path(professor) %></td>
-        <td><%= link_to 'Destroy', professor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('links.show'), professor %></td>
+        <td><%= link_to t('links.edit'), edit_professor_path(professor) %></td>
+        <td><%= link_to t('links.delete'), professor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Professor', new_professor_path %>
+<%= link_to t('links.new'), new_professor_path %>

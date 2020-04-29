@@ -1,24 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Ar:</strong>
+  <strong><%= Professor.human_attribute_name(:ar) %>:</strong>
   <%= @professor.ar %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong><%= Professor.human_attribute_name(:description) %>:</strong>
   <%= @professor.description %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= Professor.human_attribute_name(:email) %>:</strong>
   <%= @professor.email %>
 </p>
 
 <p>
-  <strong>Telephone:</strong>
+  <strong><%= Professor.human_attribute_name(:telephone) %>:</strong>
   <%= @professor.telephone %>
 </p>
 
-<%= link_to 'Edit', edit_professor_path(@professor) %> |
-<%= link_to 'Back', professors_path %>
+<%= link_to t('links.edit'), edit_professor_path(@professor) %> |
+<%= link_to t('links.back'), professors_path %>

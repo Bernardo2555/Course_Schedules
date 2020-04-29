@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_160001) do
+ActiveRecord::Schema.define(version: 2020_04_29_133520) do
 
   create_table "courses", primary_key: "code_c", force: :cascade do |t|
     t.string "description"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_160001) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "group"
+    t.time "time_end"
     t.index ["course_type", "course_id"], name: "index_schedules_on_course_type_and_course_id"
     t.index ["professor_type", "professor_id"], name: "index_schedules_on_professor_type_and_professor_id"
   end

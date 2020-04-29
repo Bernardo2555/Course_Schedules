@@ -1,29 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Ar:</strong>
+  <strong><%= Student.human_attribute_name(:ar) %>:</strong>
   <%= @student.ar %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong><%= Student.human_attribute_name(:description) %>:</strong>
   <%= @student.description %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= Student.human_attribute_name(:email) %>:</strong>
   <%= @student.email %>
 </p>
 
 <p>
-  <strong>Telephone:</strong>
+  <strong><%= Student.human_attribute_name(:telephone) %>:</strong>
   <%= @student.telephone %>
 </p>
 
 <p>
-  <strong>Year:</strong>
+  <strong><%= Student.human_attribute_name(:year) %>:</strong>
   <%= @student.year %>
 </p>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<%= link_to t('links.edit'), edit_student_path(@student) %> |
+<%= link_to t('links.back'), students_path %>
