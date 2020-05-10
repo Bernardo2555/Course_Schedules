@@ -29,6 +29,12 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
 
+    (params[:students] || []).each do |student|
+      unless student.empty?
+        @schedule.students.build(students: student)
+      end
+    end
+
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to @schedule, notice: 'Schedule was successfully created.' }

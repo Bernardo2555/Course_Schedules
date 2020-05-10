@@ -4,33 +4,33 @@
 
 <table>
   <thead>
-    <tr>
-      <th><%= @schedules.human_attribute_name(:professor) %></th>
-      <th><%= @schedules.human_attribute_name(:course) %></th>
-      <th><%= @schedules.human_attribute_name(:student) %></th>
-      <th><%= @schedules.human_attribute_name(:weekday) %></th>
-      <th><%= @schedules.human_attribute_name(:group) %></th>
-      <th><%= @schedules.human_attribute_name(:time) %></th>
-      <th><%= @schedules.human_attribute_name(:time_end) %></th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th><%= @schedules.human_attribute_name(:professor) %></th>
+    <th><%= @schedules.human_attribute_name(:course) %></th>
+    <th><%= @schedules.human_attribute_name(:students) %></th>
+    <th><%= @schedules.human_attribute_name(:weekday) %></th>
+    <th><%= @schedules.human_attribute_name(:group) %></th>
+    <th><%= @schedules.human_attribute_name(:time) %></th>
+    <th><%= @schedules.human_attribute_name(:time_end) %></th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @schedules.each do |schedule| %>
-      <tr>
-        <td><%= Professor.find(schedule.professor_id).description %></td>
-        <td><%= Course.find(schedule.course_id).description %></td>
-        <td><%= Student.find(schedule.students).description %></td>
-        <td><%= schedule.weekday %></td>
-        <td><%= schedule.group %></td>
-        <td><%= schedule.time %></td>
-        <td><%= schedule.time_end %></td>
-        <td><%= link_to t('links.show'), schedule %></td>
-        <td><%= link_to t('links.edit'), edit_schedule_path(schedule) %></td>
-        <td><%= link_to t('links.delete'), schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <% @schedules.each do |schedule| %>
+    <tr>
+      <td><%= Professor.find(schedule.professor_id).description %></td>
+      <td><%= Course.find(schedule.course_id).description %></td>
+      <td><%= schedule.students.try(:each){|student| puts student} %></td>
+      <td><%= schedule.weekday %></td>
+      <td><%= schedule.group %></td>
+      <td><%= schedule.time %></td>
+      <td><%= schedule.time_end %></td>
+      <td><%= link_to t('links.show'), schedule %></td>
+      <td><%= link_to t('links.edit'), edit_schedule_path(schedule) %></td>
+      <td><%= link_to t('links.delete'), schedule, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 

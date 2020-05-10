@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :students %>
-    <%= form.select :students, @student_options, include_blank: true %>
+    <%= form.select :students, @student_options, {}, multiple: true%>
   </div>
 
   <div class="field">
     <%= form.label :weekday %>
-    <%= form.text_field :weekday %>
+    <%= form.select :weekday, ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'], include_blank: true %>
   </div>
 <!--  colocar como selection box com os dias da semana-->
 
