@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Courses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= @courses.human_attribute_name(:code_c) %></th>
+      <th><%= @courses.human_attribute_name(:description) %></th>
+      <th><%= @courses.human_attribute_name(:ideal_year) %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.code_c %></td>
+        <td><%= course.description %></td>
+        <td><%= course.ideal_year %></td>
+        <td><%= link_to t('links.edit'), edit_admins_backoffice_course_path(course) %></td>
+        <td><%= link_to t('links.delete'), admins_backoffice_course_path(course), method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('links.new'), new_admins_backoffice_course_path %>

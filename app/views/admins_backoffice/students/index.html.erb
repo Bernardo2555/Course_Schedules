@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Students</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= @students.human_attribute_name(:ar) %></th>
+      <th><%= @students.human_attribute_name(:description) %></th>
+      <th><%= @students.human_attribute_name(:email) %></th>
+      <th><%= @students.human_attribute_name(:telephone) %></th>
+      <th><%= @students.human_attribute_name(:year) %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.ar %></td>
+        <td><%= student.description %></td>
+        <td><%= student.email %></td>
+        <td><%= student.telephone %></td>
+        <td><%= student.year %></td>
+        <td><%= link_to t('links.edit'), edit_admins_backoffice_student_path(student) %></td>
+        <td><%= link_to t('links.delete'), admins_backoffice_student_path(student), method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('links.new'), new_admins_backoffice_student_path %>

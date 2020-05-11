@@ -1,0 +1,54 @@
+<%= form_with(model: [:admins_backoffice, @schedule], local: true) do |form| %>
+  <% if schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+      <ul>
+        <% schedule.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :professor_id %>
+    <%= form.select :professor_id, @professor_options, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_id %>
+    <%= form.select :course_id, @course_options, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :students %>
+    <%= form.select :students, @student_options, {}, multiple: true%>
+  </div>
+
+  <div class="field">
+    <%= form.label :weekday %>
+    <%= form.select :weekday, ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'], include_blank: true %>
+  </div>
+<!--  colocar como selection box com os dias da semana-->
+
+  <div class="field">
+    <%= form.label :group %>
+    <%= form.text_field :group %>
+  </div>
+<!--  colocar como selection button-->
+
+  <div class="field">
+    <%= form.label :time %>
+    <%= form.time_select :time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_end %>
+    <%= form.time_select :time_end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

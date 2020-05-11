@@ -1,17 +1,13 @@
 <h1>Seja Bem-Vindo!!</h1>
 <p>Idioma ativo é: <%=I18n.locale%></p>
-<p> Data <%= Date.today %></p>
+<p> Data <%= I18n.l Date.today %></p>
 <ul>
+
   <li>
-    <%= link_to "Cadastro de estudantes", students_path %>
+    <%= link_to "LogIn Professor", users_backoffice_welcome_index_path %>
   </li>
   <li>
-    <%= link_to "Cadastro de materias", courses_path %>
+    <%= link_to "LogIn Chefe do departamento", admins_backoffice_welcome_index_path %>
   </li>
-  <li>
-    <%= link_to "Cadastro de professores", professors_path %>
-  </li>
-  <li>
-    <%= link_to "Cadastro das aulas", schedules_path %>
-  </li>
+
 </ul>

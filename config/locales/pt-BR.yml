@@ -6,6 +6,8 @@ pt-BR:
       professor: Professor
       schedule: Aula
       student: Estudante
+      admin: Administrador
+      user: Usuário
     attributes:
       course:
         code_c: Código
