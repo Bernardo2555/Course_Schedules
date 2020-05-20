@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_231348) do
+ActiveRecord::Schema.define(version: 2020_05_20_181259) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,14 +27,6 @@ ActiveRecord::Schema.define(version: 2020_05_10_231348) do
   create_table "courses", primary_key: "code_c", force: :cascade do |t|
     t.string "description"
     t.integer "ideal_year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "professors", primary_key: "ar", force: :cascade do |t|
-    t.string "description"
-    t.string "email"
-    t.string "telephone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,6 +62,11 @@ ActiveRecord::Schema.define(version: 2020_05_10_231348) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "description"
+    t.string "telephone"
+    t.string "ar"
+    t.string "can_time"
+    t.string "cant_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

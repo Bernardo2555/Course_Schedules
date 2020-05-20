@@ -33,7 +33,12 @@ namespace :dev do
     User.create!(
         email: 'user@user.com',
         password: 123456,
-        password_confirmation: 123456
+        password_confirmation: 123456,
+        description: 'User',
+        telephone: '19 99999-9999',
+        ar: '123456',
+        can_time: '16:50',
+        cant_time: '12:00'
     )
   end
 

@@ -88,19 +88,16 @@ show_spinner("Seeding courses to db...") do
   end
 end
 
-show_spinner("Seeding professors to db...") do
-
-  professors = ([
-      {ar: '1', description: 'Marcos Quinaia'},
-      {ar: '2', description: 'Maria Luisa'},
-      {ar: '3', description: 'Mauro Miazaqui'},
-      {ar: '4', description: 'Ana Elisa'},
-  ])
-
-  professors.each do |professor|
-    Professor.find_or_create_by!(professor)
-  end
-end
+# show_spinner("Seeding professors to db...") do
+#
+#   users = ([
+#
+#   ])
+#
+#   users.each do |professor|
+#     User.find_or_create_by!(professor)
+#   end
+# end
 
 show_spinner("Seeding student to db...") do
 

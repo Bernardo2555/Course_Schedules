@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
   namespace :users_backoffice do
     get 'welcome/index'
-    resources :professors
-  end
+    end
 
   namespace :admins_backoffice do
     get 'welcome/index'
@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     resources :schedules
     resources :students
   end
-  devise_for :users
   devise_for :admins
 
   get 'inicio', to: 'welcome#index'
