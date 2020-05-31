@@ -32,19 +32,19 @@ ActiveRecord::Schema.define(version: 2020_05_20_181259) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.string "professor_type"
-    t.integer "professor_id"
+    t.string "user_type"
+    t.integer "user_id"
     t.string "course_type"
     t.integer "course_id"
     t.string "students"
     t.string "weekday"
+    t.string "group"
     t.time "time"
+    t.time "time_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "group"
-    t.time "time_end"
     t.index ["course_type", "course_id"], name: "index_schedules_on_course_type_and_course_id"
-    t.index ["professor_type", "professor_id"], name: "index_schedules_on_professor_type_and_professor_id"
+    t.index ["user_type", "user_id"], name: "index_schedules_on_user_type_and_user_id"
   end
 
   create_table "students", primary_key: "ar", force: :cascade do |t|

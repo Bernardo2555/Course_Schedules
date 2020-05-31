@@ -3,24 +3,25 @@ pt-BR:
   activerecord:
     models:
       course: Materia
-      professor: Professor
+      user: Professor
       schedule: Aula
       student: Estudante
       admin: Administrador
-      user: Usuário
     attributes:
       course:
         code_c: Código
         description: Nome
         ideal_year: Ano Ideal
-      professor:
+      user:
         ar: Resgistro Acadêmico
         description: Nome
         email: Email
         telephone: Telefone
+        can_time: Tempo livre
+        cant_time: Tempo ocupado
       schedule:
-        professor_id: Professor
-        professor: Professor
+        user_id: Professor
+        user: Professor
         course_id: Curso
         course: Curso
         students: Estudantes

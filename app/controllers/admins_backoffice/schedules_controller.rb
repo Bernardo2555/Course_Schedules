@@ -68,7 +68,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   private
 
   def set_professor_options
-    @professor_options = Professor.all.pluck(:description, :ar)
+    @user_options = User.all.pluck(:description, :ar)
   end
 
   def set_course_options
