@@ -10,15 +10,17 @@ Rails.application.routes.draw do
   #protect links for users
   namespace :users_backoffice do
     get 'welcome/index'
+    resources :users
   end
   devise_for :users
 
   #protect links for admins
   namespace :admins_backoffice do
     get 'welcome/index'
+    get 'users/index'
     resources :courses
     resources :schedules
-    resources :student
+    resources :students
   end
   devise_for :admins
 
