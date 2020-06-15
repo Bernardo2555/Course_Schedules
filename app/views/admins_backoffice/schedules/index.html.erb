@@ -19,7 +19,7 @@
   <tbody>
   <% @schedules.each do |schedule| %>
     <tr>
-      <td><%= Users.find(schedule.professor_id).description %></td>
+      <td><%= User.find(schedule.user_id).description %></td>
       <td><%= Course.find(schedule.course_id).description %></td>
       <td><%= schedule.students.try(:each){|student| puts student} %></td>
       <td><%= schedule.weekday %></td>

@@ -1,6 +1,6 @@
 class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :set_schedule, only: [:edit, :update, :destroy]
-  before_action :set_professor_options, only: [:new, :create, :edit, :update]
+  before_action :set_user_options, only: [:new, :create, :edit, :update]
   before_action :set_course_options, only: [:new, :create, :edit, :update]
   before_action :set_student_options, only: [:new, :create, :edit, :update]
 
@@ -67,8 +67,8 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
 
   private
 
-  def set_professor_options
-    @user_options = User.all.pluck(:description, :ar)
+  def set_user_options
+    @user_options = User.all.pluck(:description, :id)
   end
 
   def set_course_options
@@ -86,6 +86,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
 
   # Only allow a list of trusted parameters through.
   def schedule_params
-    params.require(:schedule).permit(:professor_id, :course_id, :students, :weekday, :time, :time_end, :group)
+    params.require(:schedule).permit(:user_id, :course_id, :students, :weekday,
+                                     :time, :time_end, :group)
   end
 end
