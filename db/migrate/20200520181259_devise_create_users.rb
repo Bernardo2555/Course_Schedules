@@ -35,8 +35,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :description
       t.string :telephone
       t.string :ar
-      t.string :can_time
-      t.string :cant_time
+      t.time :can_time
+      t.time :cant_time
 
       t.timestamps null: false
     end

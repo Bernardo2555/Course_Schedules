@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   #protect links for admins
   namespace :admins_backoffice do
     get 'welcome/index'
-    get 'users/index'
+    resources :users
     resources :courses
     resources :schedules
     resources :students

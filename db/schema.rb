@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2020_05_20_181259) do
     t.string "description"
     t.string "telephone"
     t.string "ar"
-    t.string "can_time"
-    t.string "cant_time"
+    t.time "can_time"
+    t.time "cant_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
