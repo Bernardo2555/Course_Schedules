@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   namespace :admins_backoffice do
     get 'welcome/index'
     resources :users
+    resources :admins
     resources :courses
     resources :schedules
     resources :students

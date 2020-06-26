@@ -24,8 +24,8 @@
       <td><%= user.telephone %></td>
       <td><%= user.can_time %></td>
       <td><%= user.cant_time %></td>
-      <td><%= link_to t('links.edit'), edit_user_registration_path(user) %></td>
-      <td><%= link_to t('links.delete'), user_registration_path, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+      <td><%= link_to t('links.edit'), edit_admins_backoffice_user_path(user) %></td>
+      <td><%= link_to t('links.delete'), admins_backoffice_user_path(user), method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
     </tr>
   <% end %>
   </tbody>
@@ -34,5 +34,3 @@
 <br>
 
 <%= link_to t('links.new'), new_admins_backoffice_user_path %>
-
-<%= link_to t('links.new'), new_user_registration_path %>
