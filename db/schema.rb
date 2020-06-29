@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 2020_05_20_181259) do
     t.string "students"
     t.string "weekday"
     t.string "group"
-    t.time "time"
-    t.time "time_end"
+    t.string "time"
+    t.string "time_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_type", "course_id"], name: "index_schedules_on_course_type_and_course_id"
@@ -65,8 +65,9 @@ ActiveRecord::Schema.define(version: 2020_05_20_181259) do
     t.string "description"
     t.string "telephone"
     t.string "ar"
-    t.time "can_time"
-    t.time "cant_time"
+    t.string "cant_day"
+    t.string "cant_time"
+    t.string "cant_time_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

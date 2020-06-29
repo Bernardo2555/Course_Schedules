@@ -63,6 +63,6 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
-                                 :description, :telephone, :ar, :can_time, :cant_time)
+                                 :description, :telephone, :ar, :cant_day, :cant_time)
   end
 end

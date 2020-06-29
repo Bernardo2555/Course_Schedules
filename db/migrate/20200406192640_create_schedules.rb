@@ -6,8 +6,8 @@
       t.string :students
       t.string :weekday
       t.string :group
-      t.time :time
-      t.time :time_end
+      t.string :time
+      t.string :time_end
 
       t.timestamps
     end

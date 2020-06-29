@@ -9,8 +9,9 @@
     <th><%= @users.human_attribute_name(:description) %></th>
     <th><%= @users.human_attribute_name(:email) %></th>
     <th><%= @users.human_attribute_name(:telephone) %></th>
-    <th><%= @users.human_attribute_name(:can_time) %></th>
+    <th><%= @users.human_attribute_name(:cant_day) %></th>
     <th><%= @users.human_attribute_name(:cant_time) %></th>
+    <th><%= @users.human_attribute_name(:cant_time_end) %></th>
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -22,8 +23,9 @@
       <td><%= user.description %></td>
       <td><%= user.email %></td>
       <td><%= user.telephone %></td>
-      <td><%= user.can_time %></td>
+      <td><%= user.cant_day %></td>
       <td><%= user.cant_time %></td>
+      <td><%= user.cant_time_end %></td>
       <td><%= link_to t('links.edit'), edit_admins_backoffice_user_path(user) %></td>
       <td><%= link_to t('links.delete'), admins_backoffice_user_path(user), method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
     </tr>

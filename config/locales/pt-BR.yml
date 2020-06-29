@@ -19,8 +19,9 @@ pt-BR:
         password: Senha
         password_confirmation: Confirmação da senha
         telephone: Telefone
-        can_time: Tempo livre
-        cant_time: Tempo ocupado
+        cant_day: Dia ocupado
+        cant_time: Inicio do tempo ocupado
+        cant_time_end: Fim do tempo ocupado
       schedule:
         user_id: Professor
         user: Professor
@@ -28,8 +29,8 @@ pt-BR:
         course: Curso
         students: Estudantes
         weekday: Dia da semana
-        time: Hora de inicio
-        time_end: Hora de fim
+        time: Hora do inicio da aula
+        time_end: Hora do fim da aula
         group: Turma
       student:
         ar: Resgistro Acadêmico

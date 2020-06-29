@@ -88,17 +88,6 @@ show_spinner("Seeding courses to db...") do
   end
 end
 
-# show_spinner("Seeding professors to db...") do
-#
-#   users = ([
-#
-#   ])
-#
-#   users.each do |professor|
-#     User.find_or_create_by!(professor)
-#   end
-# end
-
 show_spinner("Seeding student to db...") do
 
   students = ([
