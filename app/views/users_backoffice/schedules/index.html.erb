@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @schedules.human_attribute_name(:schedule) %></h1>
+
+<table>
+  <thead>
+  <tr>
+    <th><%= @schedules.human_attribute_name(:professor) %></th>
+    <th><%= @schedules.human_attribute_name(:course) %></th>
+    <th><%= @schedules.human_attribute_name(:students) %></th>
+    <th><%= @schedules.human_attribute_name(:weekday) %></th>
+    <th><%= @schedules.human_attribute_name(:group) %></th>
+    <th><%= @schedules.human_attribute_name(:time) %></th>
+    <th><%= @schedules.human_attribute_name(:time_end) %></th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @schedules.each do |schedule| %>
+    <tr>
+      <td><%= User.find(schedule.user_id).description %></td>
+      <td><%= Course.find(schedule.course_id).description %></td>
+      <td><%= schedule.students.try(:each){|student| puts student} %></td>
+      <td><%= schedule.weekday %></td>
+      <td><%= schedule.group %></td>
+      <td><%= schedule.time %></td>
+      <td><%= schedule.time_end %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+

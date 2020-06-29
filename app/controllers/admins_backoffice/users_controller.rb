@@ -1,5 +1,7 @@
 class AdminsBackoffice::UsersController < AdminsBackofficeController
   before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :verify_password, only: [:update]
+
 
   def index
     @users = User.all
@@ -47,6 +49,12 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
   end
 
   private
+
+  def verify_password
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].extract!(:password, :password_confirmation)
+    end
+  end
 
 # Use callbacks to share common setup or constraints between actions.
   def set_user

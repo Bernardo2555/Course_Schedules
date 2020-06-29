@@ -1,49 +1,17 @@
 class UsersBackoffice::UsersController < UsersBackofficeController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update]
+  before_action :verify_password, only: [:update]
 
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-  end
-
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
-
-  # GET /users/new
-  def new
-    @users = User.new
-  end
-
-  # GET /users/1/edit
   def edit
   end
 
-  # POST /users
-  # POST /users.json
-  def create
-    @users = User.new(user_params)
-
-    respond_to do |format|
-      if @users.save
-        format.html { redirect_to @users, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @users }
-      else
-        format.html { render :new }
-        format.json { render json: @users.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
+
     respond_to do |format|
-      if @users.update(user_params)
-        format.html { redirect_to @users, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @users }
+      if @user.update(user_params)
+        sign_in(@user, bypass: true)
+        format.html { redirect_to edit_users_backoffice_user_path( @user = User.find(current_user.id) ), notice: 'User was successfully updated.'}
+        format.json { render status: :ok, location: @users }
       else
         format.html { render :edit }
         format.json { render json: @users.errors, status: :unprocessable_entity }
@@ -51,25 +19,20 @@ class UsersBackoffice::UsersController < UsersBackofficeController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @users.destroy
-    respond_to do |format|
-      format.html { redirect_to user_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+  private
+
+  def verify_password
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].extract!(:password, :password_confirmation)
     end
   end
 
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @users = User.find(params[:id])
+  @user = User.find(current_user.id)
   end
 
-  # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:@users).permit(:ar, :description, :email, :telephone)
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :description, :telephone, :ar, :can_time, :cant_time)
   end
 end

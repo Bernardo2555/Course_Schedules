@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :admins_backoffice do
     get 'admins/index'
   end
@@ -10,7 +11,8 @@ Rails.application.routes.draw do
   #protect links for users
   namespace :users_backoffice do
     get 'welcome/index'
-    resources :users
+    resources :users, only: [:edit, :update]
+    get 'schedules/index'
   end
   devise_for :users
 

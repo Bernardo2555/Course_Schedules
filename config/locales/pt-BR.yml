@@ -16,6 +16,8 @@ pt-BR:
         ar: Resgistro Acadêmico
         description: Nome
         email: Email
+        password: Senha
+        password_confirmation: Confirmação da senha
         telephone: Telefone
         can_time: Tempo livre
         cant_time: Tempo ocupado

@@ -1,8 +1,10 @@
 <h1>UsersBackoffice::Welcome#index</h1>
 <p>Find me in app/views/users_backoffice/welcome/index.html.erb</p>
 
+<p><%= User.find(current_user.id).description %></p>
 
+<p> <%= link_to 'Professor', edit_users_backoffice_user_path( @user = User.find(current_user.id) )%> </p>
 
-<p> <%= link_to 'Professor', users_backoffice_users_path%> </p>
+<p> <%= link_to 'Horários', users_backoffice_schedules_index_path %> </p>
 
 <p> <%= link_to 'LogOff', destroy_user_session_path, method: :delete%> </p>
