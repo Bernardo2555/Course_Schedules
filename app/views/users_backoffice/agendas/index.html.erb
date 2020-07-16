@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Agenda de <%= User.find(current_user.id).description %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Agenda</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= @agendas.agenda %></td>
+        <td><%= link_to t('links.edit'), edit_users_backoffice_agenda_path(@agendas) %></td>
+      </tr>
+  </tbody>
+</table>
+
+<br>

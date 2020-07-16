@@ -5,6 +5,8 @@
 
 <p> <%= link_to 'Professor', edit_users_backoffice_user_path( @user = User.find(current_user.id) )%> </p>
 
+<p> <%= link_to 'Agenda', users_backoffice_agendas_path %> </p>
+
 <p> <%= link_to 'Horários', users_backoffice_schedules_index_path %> </p>
 
 <p> <%= link_to 'LogOff', destroy_user_session_path, method: :delete%> </p>

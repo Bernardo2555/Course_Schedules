@@ -12,6 +12,8 @@ namespace :dev do
 
       show_spinner("Creating user...") { %x(rails dev:add_default_user) }
 
+      show_spinner("Creating agenda...") { %x(rails dev:add_default_agenda) }
+
       %x(rails db:seed)
 
     else
@@ -40,6 +42,13 @@ namespace :dev do
         cant_day: 'segunda-feira, quarta-feira',
         cant_time: '12:00',
         cant_time_end: '13:00'
+    )
+  end
+
+  desc "Adiciona a agenda do usuário padrão"
+  task add_default_agenda: :environment do
+    Agenda.create!(
+        user_id: 1
     )
   end
 
