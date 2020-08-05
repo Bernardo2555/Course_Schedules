@@ -3,6 +3,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :set_user_options, only: [:new, :create, :edit, :update]
   before_action :set_course_options, only: [:new, :create, :edit, :update]
   before_action :set_student_options, only: [:new, :create, :edit, :update]
+  before_action :professor_schedule, only: [:create, :edit, :update]
 
   # GET /schedules
   # GET /schedules.json
@@ -25,17 +26,16 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     @schedule = Schedule.new(schedule_params)
 
     (params[:students] || []).each do |student|
-      unless student.empty?
-        @schedule.students.build(students: student)
-      end
+      @schedule.students.build(students: student) unless student.empty?
     end
 
     respond_to do |format|
-      if @schedule.save
+      if @block
+        @schedule.save
         format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully created.' }
         format.json { render status: :created, location: @schedule }
       else
-        format.html { render :new }
+        format.html { render :new}
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
     end
@@ -45,7 +45,8 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   # PATCH/PUT /schedules/1.json
   def update
     respond_to do |format|
-      if @schedule.update(schedule_params)
+      if professor_schedule
+        @schedule.update(schedule_params)
         format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully updated.' }
         format.json { render status: :ok, location: @schedule }
       else
@@ -88,5 +89,16 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   def schedule_params
     params.require(:schedule).permit(:user_id, :course_id, :students, :weekday,
                                      :time, :time_end, :group)
+  end
+
+  # @return [FalseClass, TrueClass]
+  def professor_schedule
+    if User.find(schedule_params[:user_id])
+      user = User.find(schedule_params[:user_id])
+      @block = false if schedule_params[:time].to_i <= user.cant_time.to_i
+      @block = false if schedule_params[:time_end].to_i >= user.cant_time_end.to_i
+    else
+      @block = true
+    end
   end
 end

@@ -39,9 +39,6 @@ namespace :dev do
         description: 'User',
         telephone: '19 99999-9999',
         ar: '123456',
-        cant_day: 'segunda-feira, quarta-feira',
-        cant_time: '12:00',
-        cant_time_end: '13:00'
     )
   end
 

@@ -4,22 +4,167 @@
       <h2><%= pluralize(agenda.errors.count, "error") %> prohibited this agenda from being saved:</h2>
 
       <ul>
-      <% agenda.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% agenda.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :agenda %>
-    <%= form.text_field :agenda %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+  <table>
+    <tbody>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Segunda-Feira</th>
+      <th>Terça-Feira</th>
+      <th>Quarta-Feira</th>
+      <th>Quinta-Feira</th>
+      <th>Sexta-Feira</th>
+      <th>Sábado</th>
+    </tr>
+    <tr align="center">
+      <th>07:30</th>
+      <td><%= form.check_box :agenda['07:30'] %></td>
+      <td><%= form.check_box :agenda['07:30'] %></td>
+      <td><%= form.check_box :agenda['07:30'] %></td>
+      <td><%= form.check_box :agenda['07:30'] %></td>
+      <td><%= form.check_box :agenda['07:30'] %></td>
+      <td><%= form.check_box :agenda['07:30'] %></td>
+    </tr>
+    <tr align="center">
+      <th>08:20</th>
+      <td><%= form.check_box :agenda['08:20'] %></td>
+      <td><%= form.check_box :agenda['08:20'] %></td>
+      <td><%= form.check_box :agenda['08:20'] %></td>
+      <td><%= form.check_box :agenda['08:20'] %></td>
+      <td><%= form.check_box :agenda['08:20'] %></td>
+      <td><%= form.check_box :agenda['08:20'] %></td>
+    </tr>
+    <tr align="center">
+      <th>09:10</th>
+      <td><%= form.check_box :agenda['09:10'] %></td>
+      <td><%= form.check_box :agenda['09:10'] %></td>
+      <td><%= form.check_box :agenda['09:10'] %></td>
+      <td><%= form.check_box :agenda['09:10'] %></td>
+      <td><%= form.check_box :agenda['09:10'] %></td>
+      <td><%= form.check_box :agenda['09:10'] %></td>
+    </tr>
+    <tr align="center">
+      <th>10:10</th>
+      <td><%= form.check_box :agenda['10:10'] %></td>
+      <td><%= form.check_box :agenda['10:10'] %></td>
+      <td><%= form.check_box :agenda['10:10'] %></td>
+      <td><%= form.check_box :agenda['10:10'] %></td>
+      <td><%= form.check_box :agenda['10:10'] %></td>
+      <td><%= form.check_box :agenda['10:10'] %></td>
+    </tr>
+    <tr align="center">
+      <Th>11:00</Th>
+      <td><%= form.check_box :agenda['11:00'] %></td>
+      <td><%= form.check_box :agenda['11:00'] %></td>
+      <td><%= form.check_box :agenda['11:00'] %></td>
+      <td><%= form.check_box :agenda['11:00'] %></td>
+      <td><%= form.check_box :agenda['11:00'] %></td>
+      <td><%= form.check_box :agenda['11:00'] %></td>
+    </tr>
+    <tr align="center">
+      <th>13:20</th>
+      <td><%= form.check_box :agenda['13:20'] %></td>
+      <td><%= form.check_box :agenda['13:20'] %></td>
+      <td><%= form.check_box :agenda['13:20'] %></td>
+      <td><%= form.check_box :agenda['13:20'] %></td>
+      <td><%= form.check_box :agenda['13:20'] %></td>
+      <td><%= form.check_box :agenda['13:20'] %></td>
+    </tr>
+    <tr align="center">
+      <Th>14:10</Th>
+      <td><%= form.check_box :agenda['14:10'] %></td>
+      <td><%= form.check_box :agenda['14:10'] %></td>
+      <td><%= form.check_box :agenda['14:10'] %></td>
+      <td><%= form.check_box :agenda['14:10'] %></td>
+      <td><%= form.check_box :agenda['14:10'] %></td>
+      <td><%= form.check_box :agenda['14:10'] %></td>
+    </tr>
+    <tr align="center">
+      <Th>15:00</Th>
+      <td><%= form.check_box :agenda['15:00'] %></td>
+      <td><%= form.check_box :agenda['15:00'] %></td>
+      <td><%= form.check_box :agenda['15:00'] %></td>
+      <td><%= form.check_box :agenda['15:00'] %></td>
+      <td><%= form.check_box :agenda['15:00'] %></td>
+      <td><%= form.check_box :agenda['15:00'] %></td>
+    </tr>
+    <tr align="center">
+      <th>16:00</th>
+      <td><%= form.check_box :agenda['16:00'] %></td>
+      <td><%= form.check_box :agenda['16:00'] %></td>
+      <td><%= form.check_box :agenda['16:00'] %></td>
+      <td><%= form.check_box :agenda['16:00'] %></td>
+      <td><%= form.check_box :agenda['16:00'] %></td>
+      <td><%= form.check_box :agenda['16:00'] %></td>
+    </tr>
+    <tr align="center">
+      <th>16:50</th>
+      <td><%= form.check_box :agenda['16:50'] %></td>
+      <td><%= form.check_box :agenda['16:50'] %></td>
+      <td><%= form.check_box :agenda['16:50'] %></td>
+      <td><%= form.check_box :agenda['16:50'] %></td>
+      <td><%= form.check_box :agenda['16:50'] %></td>
+      <td><%= form.check_box :agenda['16:50'] %></td>
+    <tr align="center">
+      <Th>17:40</Th>
+      <td><%= form.check_box :agenda['17:40'] %></td>
+      <td><%= form.check_box :agenda['17:40'] %></td>
+      <td><%= form.check_box :agenda['17:40'] %></td>
+      <td><%= form.check_box :agenda['17:40'] %></td>
+      <td><%= form.check_box :agenda['17:40'] %></td>
+      <td><%= form.check_box :agenda['17:40'] %></td>
+    </tr>
+    <tr align="center">
+      <th>18:50</th>
+      <td><%= form.check_box :agenda['18:50'] %></td>
+      <td><%= form.check_box :agenda['18:50'] %></td>
+      <td><%= form.check_box :agenda['18:50'] %></td>
+      <td><%= form.check_box :agenda['18:50'] %></td>
+      <td><%= form.check_box :agenda['18:50'] %></td>
+      <td><%= form.check_box :agenda['18:50'] %></td>
+    </tr>
+    <tr align="center">
+      <Th>19:40</Th>
+      <td><%= form.check_box :agenda['19:40'] %></td>
+      <td><%= form.check_box :agenda['19:40'] %></td>
+      <td><%= form.check_box :agenda['19:40'] %></td>
+      <td><%= form.check_box :agenda['19:40'] %></td>
+      <td><%= form.check_box :agenda['19:40'] %></td>
+      <td><%= form.check_box :agenda['19:40'] %></td>
+    <tr align="center">
+      <th>20:30</th>
+      <td><%= form.check_box :agenda['20:30'] %></td>
+      <td><%= form.check_box :agenda['20:30'] %></td>
+      <td><%= form.check_box :agenda['20:30'] %></td>
+      <td><%= form.check_box :agenda['20:30'] %></td>
+      <td><%= form.check_box :agenda['20:30'] %></td>
+      <td><%= form.check_box :agenda['20:30'] %></td>
+    </tr>
+    <tr align="center">
+      <Th>21:30</Th>
+      <td><%= form.check_box :agenda['21:30'] %></td>
+      <td><%= form.check_box :agenda['21:30'] %></td>
+      <td><%= form.check_box :agenda['21:30'] %></td>
+      <td><%= form.check_box :agenda['21:30'] %></td>
+      <td><%= form.check_box :agenda['21:30'] %></td>
+      <td><%= form.check_box :agenda['21:30'] %></td>
+    </tr>
+    <tr align="center">
+      <th>22:30</th>
+      <td><%= form.check_box :agenda['22:30'] %></td>
+      <td><%= form.check_box :agenda['22:30'] %></td>
+      <td><%= form.check_box :agenda['22:30'] %></td>
+      <td><%= form.check_box :agenda['22:30'] %></td>
+      <td><%= form.check_box :agenda['22:30'] %></td>
+      <td><%= form.check_box :agenda['22:30'] %></td>
+    </tbody>
+  </table>
 
   <div class="actions">
     <%= form.submit %>

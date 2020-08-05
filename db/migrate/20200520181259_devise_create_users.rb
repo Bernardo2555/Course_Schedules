@@ -35,9 +35,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :description
       t.string :telephone
       t.string :ar, unique: true
-      t.string :cant_day
-      t.string :cant_time
-      t.string :cant_time_end
       # t.references :agenda, foreign_key: true
 
       t.timestamps null: false

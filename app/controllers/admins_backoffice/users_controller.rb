@@ -3,6 +3,7 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
   before_action :verify_password, only: [:update]
 
 
+  
   def index
     @users = User.all
   end
@@ -19,6 +20,9 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
 
     respond_to do |format|
       if @user.save
+        agenda = Agenda.new(user_id: User.last.id)
+        agenda.save
+
         format.html { redirect_to admins_backoffice_users_path, notice: 'Admin was successfully created.' }
         format.json { render status: :created, location: @user }
       else
@@ -63,6 +67,6 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
-                                 :description, :telephone, :ar, :cant_day, :cant_time)
+                                 :description, :telephone, :ar)
   end
 end
