@@ -25,7 +25,22 @@ ActiveRecord::Schema.define(version: 2020_07_15_174229) do
   end
 
   create_table "agendas", force: :cascade do |t|
-    t.string "agenda"
+    t.string "morning_one"
+    t.string "morning_two"
+    t.string "morning_three"
+    t.string "morning_four"
+    t.string "morning_five"
+    t.string "afternoon_one"
+    t.string "afternoon_two"
+    t.string "afternoon_three"
+    t.string "afternoon_four"
+    t.string "afternoon_five"
+    t.string "afternoon_six"
+    t.string "evening_one"
+    t.string "evening_two"
+    t.string "evening_three"
+    t.string "evening_four"
+    t.string "evening_five"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

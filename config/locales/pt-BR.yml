@@ -40,8 +40,23 @@ pt-BR:
         telephone: Telefone
         year: Ano
       agenda:
-        agenda: Agenda
         user: Usuário
+        morning_one: '7:30'
+        morning_two: '8:20'
+        morning_three: '9:10'
+        morning_four: '10:10'
+        morning_five: '11:00'
+        afternoon_one: '13:20'
+        afternoon_two: '14:10'
+        afternoon_three: '15:00'
+        afternoon_four: '16:00'
+        afternoon_five: '16:50'
+        afternoon_six: '17:40'
+        evening_one: '18:50'
+        evening_two: '19:40'
+        evening_three: '20:30'
+        evening_four: '21:30'
+        evening_five: '22:30'
 
 #view translate
   links:
@@ -52,6 +67,6 @@ pt-BR:
     back: Voltar
 
   warnings:
-    error: Algo de errado ocorreu, verificar de a ação é valida!
+    error: Algo de errado ocorreu, verificar se a ação é valida!
     sucess: Sucesso!
     confirm: Tem certeza q deseja fazer isso?

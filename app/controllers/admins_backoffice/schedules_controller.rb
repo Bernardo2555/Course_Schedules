@@ -3,7 +3,11 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :set_user_options, only: [:new, :create, :edit, :update]
   before_action :set_course_options, only: [:new, :create, :edit, :update]
   before_action :set_student_options, only: [:new, :create, :edit, :update]
-  before_action :professor_schedule, only: [:create, :edit, :update]
+  before_action :verify_time, only: [:create, :update]
+  before_action :verify_time_end, only: [:create, :update]
+  before_action :verify_day, only: [:create, :update]
+  before_action :agenda_validation, only: [:create, :update]
+  before_action :time_validation, only: [:create, :update]
 
   # GET /schedules
   # GET /schedules.json
@@ -30,12 +34,11 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     end
 
     respond_to do |format|
-      if @block
-        @schedule.save
+      if @block && @schedule.save
         format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully created.' }
         format.json { render status: :created, location: @schedule }
       else
-        format.html { render :new}
+        format.html { render :new, notice: 'Erro ao cadastrar horário, conferir agenda do professor' }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
     end
@@ -45,12 +48,11 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   # PATCH/PUT /schedules/1.json
   def update
     respond_to do |format|
-      if professor_schedule
-        @schedule.update(schedule_params)
+      if @block && @schedule.update(schedule_params)
         format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully updated.' }
         format.json { render status: :ok, location: @schedule }
       else
-        format.html { render :edit }
+        format.html { render :edit, notice: 'Erro ao cadastrar horário, conferir agenda do professor' }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
     end
@@ -91,14 +93,141 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
                                      :time, :time_end, :group)
   end
 
-  # @return [FalseClass, TrueClass]
-  def professor_schedule
-    if User.find(schedule_params[:user_id])
-      user = User.find(schedule_params[:user_id])
-      @block = false if schedule_params[:time].to_i <= user.cant_time.to_i
-      @block = false if schedule_params[:time_end].to_i >= user.cant_time_end.to_i
-    else
-      @block = true
+  def verify_time
+    case schedule_params[:time]
+    when '07:30'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).morning_one
+    when '08:20'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).morning_two
+    when '09:10'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).morning_three
+    when '10:10'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).morning_four
+    when '11:00'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).morning_five
+    when '13:20'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_one
+    when '14:10'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_two
+    when '15:00'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_three
+    when '16:00'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_four
+    when '16:50'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_five
+    when '17:40'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_six
+    when '18:50'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).evening_one
+    when '19:40'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).evening_two
+    when '20:30'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).evening_three
+    when '21:30'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).evening_four
+    when '22:30'
+      @aux_time = Agenda.find_by(user_id: schedule_params[:user_id]).evening_five
     end
   end
+
+  def verify_time_end
+    case schedule_params[:time_end]
+    when '07:30'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).morning_one
+    when '08:20'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).morning_two
+    when '09:10'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).morning_three
+    when '10:10'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).morning_four
+    when '11:00'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).morning_five
+    when '13:20'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_one
+    when '14:10'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_two
+    when '15:00'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_three
+    when '16:00'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_four
+    when '16:50'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_five
+    when '17:40'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).afternoon_six
+    when '18:50'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).evening_one
+    when '19:40'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).evening_two
+    when '20:30'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).evening_three
+    when '21:30'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).evening_four
+    when '22:30'
+      @aux_time_end = Agenda.find_by(user_id: schedule_params[:user_id]).evening_five
+    end
+  end
+
+  def verify_day
+    case schedule_params[:weekday]
+    when 'Segunda-feira'
+      @aux_week = 0
+    when 'Terca-feira'
+      @aux_week = 1
+    when 'Quarta-feira'
+      @aux_week = 2
+    when 'Quinta-feira'
+      @aux_week = 3
+    when 'Sexta-feira'
+      @aux_week = 4
+    when 'Sabado'
+      @aux_week = 5
+    end
+  end
+
+  # @return [FalseClass, TrueClass]
+  def time_validation
+    @block = false if schedule_params[:time] >= schedule_params[:time_end]
+  end
+
+  # @return [FalseClass, TrueClass]
+  def agenda_validation
+    @block = true
+    unless @aux_time.nil?
+      @aux_time.each_char do |t|
+        @block = false if t == @aux_week.to_s
+      end
+    end
+    unless @aux_time_end.nil?
+      @aux_time_end.each_char do |te|
+        @block = false if te == @aux_week.to_s
+      end
+    end
+  end
+
+  #   @aux_week.each_char do |agenda|
+  #     if agenda == @aux_time.to_s
+  #       @block = false
+  #     elsif agenda == @aux_time_end.to_s
+  #       @block = false
+  #     elsif @block
+  #       @block = true
+  #     end
+  #   end
+  # end
+
 end
+
+# # @return [FalseClass, TrueClass]
+# def compare_schedules
+#   @block = true
+#   agendas = Agenda.find_by(user_id: schedule_params[:user_id])
+#   agendas.agenda.each_char do |agenda|
+#     if agenda == (@aux_time * 6 + @aux_week)
+#       puts 'salve1'
+#       @block = false
+#     elsif agenda == (@aux_time_end * 6 + @aux_week)
+#       puts 'salve2'
+#       @block = false
+#     end
+#   end
+# end

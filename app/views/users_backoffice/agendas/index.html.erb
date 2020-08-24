@@ -5,17 +5,48 @@
 <table>
   <thead>
     <tr>
-      <th>Agenda</th>
+      <th><%= Agenda.human_attribute_name(:morning_one) %></th>
+      <th><%= Agenda.human_attribute_name(:morning_two) %></th>
+      <th><%= Agenda.human_attribute_name(:morning_three) %></th>
+      <th><%= Agenda.human_attribute_name(:morning_four) %></th>
+      <th><%= Agenda.human_attribute_name(:morning_five) %></th>
+      <th><%= Agenda.human_attribute_name(:afternoon_one) %></th>
+      <th><%= Agenda.human_attribute_name(:afternoon_two) %></th>
+      <th><%= Agenda.human_attribute_name(:afternoon_three) %></th>
+      <th><%= Agenda.human_attribute_name(:afternoon_four) %></th>
+      <th><%= Agenda.human_attribute_name(:afternoon_five) %></th>
+      <th><%= Agenda.human_attribute_name(:afternoon_six) %></th>
+      <th><%= Agenda.human_attribute_name(:evening_one) %></th>
+      <th><%= Agenda.human_attribute_name(:evening_two) %></th>
+      <th><%= Agenda.human_attribute_name(:evening_three) %></th>
+      <th><%= Agenda.human_attribute_name(:evening_four) %></th>
+      <th><%= Agenda.human_attribute_name(:evening_five) %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
       <tr>
-        <td><%= @agendas.agenda %></td>
-        <td><%= link_to t('links.edit'), edit_users_backoffice_agenda_path(@agendas) %></td>
+        <td><%= @agendas.morning_one %></td>
+        <td><%= @agendas.morning_two %></td>
+        <td><%= @agendas.morning_three %></td>
+        <td><%= @agendas.morning_four %></td>
+        <td><%= @agendas.morning_five %></td>
+        <td><%= @agendas.afternoon_one %></td>
+        <td><%= @agendas.afternoon_two %></td>
+        <td><%= @agendas.afternoon_three %></td>
+        <td><%= @agendas.afternoon_four %></td>
+        <td><%= @agendas.afternoon_five %></td>
+        <td><%= @agendas.afternoon_six %></td>
+        <td><%= @agendas.evening_one %></td>
+        <td><%= @agendas.evening_two %></td>
+        <td><%= @agendas.evening_three %></td>
+        <td><%= @agendas.evening_four %></td>
+        <td><%= @agendas.evening_five %></td>
       </tr>
   </tbody>
 </table>
+
+<%= link_to t('links.edit'), edit_users_backoffice_agenda_path(@agendas) %>
 
 <br>
