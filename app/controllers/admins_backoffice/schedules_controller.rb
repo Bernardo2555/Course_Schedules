@@ -191,12 +191,12 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     @block = true
     unless @aux_time.nil?
       @aux_time.each_char do |t|
-        @block = false if t >= @aux_week.to_s
+        @block = false if t == @aux_week.to_s
       end
     end
     unless @aux_time_end.nil?
       @aux_time_end.each_char do |te|
-        @block = false if te <= @aux_week.to_s
+        @block = false if te == @aux_week.to_s
       end
     end
   end
@@ -217,8 +217,12 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     schedules = Schedule.where(user_id: schedule_params[:user_id])
     schedules.each do |schedule|
       if schedule.weekday == schedule_params[:weekday]
-        @block = false if schedule.time == schedule_params[:time]
-        @block = false if schedule.time_end == schedule_params[:time_end]
+        unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
+          @block = false
+        end
+        unless schedule_params[:time] > schedule.time_end && schedule.time_end < schedule_params[:time_end]
+          @block = false
+        end
       end
     end
   end
