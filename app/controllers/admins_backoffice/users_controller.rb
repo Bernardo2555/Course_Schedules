@@ -22,7 +22,6 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
       if @user.save
         agenda = Agenda.new(user_id: User.last.id)
         agenda.save
-
         format.html { redirect_to admins_backoffice_users_path, notice: 'Admin was successfully created.' }
         format.json { render status: :created, location: @user }
       else

@@ -8,6 +8,8 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :verify_day, only: [:create, :update]
   before_action :agenda_validation, only: [:create, :update]
   before_action :time_validation, only: [:create, :update]
+  before_action :group_validation, only: [:create]
+  before_action :professor_class_time, only: [:create, :update]
 
   # GET /schedules
   # GET /schedules.json
@@ -185,49 +187,39 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   end
 
   # @return [FalseClass, TrueClass]
-  def time_validation
-    @block = false if schedule_params[:time] >= schedule_params[:time_end]
-  end
-
-  # @return [FalseClass, TrueClass]
   def agenda_validation
     @block = true
     unless @aux_time.nil?
       @aux_time.each_char do |t|
-        @block = false if t == @aux_week.to_s
+        @block = false if t >= @aux_week.to_s
       end
     end
     unless @aux_time_end.nil?
       @aux_time_end.each_char do |te|
-        @block = false if te == @aux_week.to_s
+        @block = false if te <= @aux_week.to_s
       end
     end
   end
 
-  #   @aux_week.each_char do |agenda|
-  #     if agenda == @aux_time.to_s
-  #       @block = false
-  #     elsif agenda == @aux_time_end.to_s
-  #       @block = false
-  #     elsif @block
-  #       @block = true
-  #     end
-  #   end
-  # end
+  # @return [FalseClass, TrueClass]
+  def time_validation
+    @block = false if schedule_params[:time] >= schedule_params[:time_end]
+  end
 
+  def group_validation
+    schedules = Schedule.where(course_id: schedule_params[:course_id])
+    schedules.each do |schedule|
+      @block = false if schedule.group == schedule_params[:group]
+    end
+  end
+
+  def professor_class_time
+    schedules = Schedule.where(user_id: schedule_params[:user_id])
+    schedules.each do |schedule|
+      if schedule.weekday == schedule_params[:weekday]
+        @block = false if schedule.time == schedule_params[:time]
+        @block = false if schedule.time_end == schedule_params[:time_end]
+      end
+    end
+  end
 end
-
-# # @return [FalseClass, TrueClass]
-# def compare_schedules
-#   @block = true
-#   agendas = Agenda.find_by(user_id: schedule_params[:user_id])
-#   agendas.agenda.each_char do |agenda|
-#     if agenda == (@aux_time * 6 + @aux_week)
-#       puts 'salve1'
-#       @block = false
-#     elsif agenda == (@aux_time_end * 6 + @aux_week)
-#       puts 'salve2'
-#       @block = false
-#     end
-#   end
-# end
