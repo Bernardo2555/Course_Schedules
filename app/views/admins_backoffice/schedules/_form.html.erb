@@ -24,20 +24,18 @@
 
   <div class="field">
     <%= form.label :students %>
-    <%= form.select :students, @student_options, {}, {multiple: true, class: "chzn-select"}%>
+    <%= form.select :students, @student_options, {}, {multiple: true}%>
   </div>
 
   <div class="field">
     <%= form.label :weekday %>
     <%= form.select :weekday, ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'], include_blank: true %>
   </div>
-<!--  colocar como selection box com os dias da semana-->
 
   <div class="field">
     <%= form.label :group %>
-    <%= form.select :group , ['A', 'B', 'C', 'D'], include_blank: true%>
+    <%= form.select :group, ['A', 'B', 'C', 'D'], include_blank: true %>
   </div>
-<!--  colocar como selection button-->
 
   <div class="field">
     <%= form.label :time %>
