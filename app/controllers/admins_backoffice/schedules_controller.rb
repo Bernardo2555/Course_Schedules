@@ -10,7 +10,8 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :time_validation, only: [:create, :update]
   before_action :group_validation, only: [:create]
   before_action :professor_class_time, only: [:create, :update]
-  # before_action :student_class_conflict, only: [:create, :update]
+  before_action :student_class_conflict_on_update, only: [:update]
+  after_action :student_class_conflict_on_create, only: [:create]
 
   # GET /schedules
   # GET /schedules.json
@@ -27,17 +28,18 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   def edit
   end
 
+  #TODO: criar notificaçao pra n criaçao do horario
   # POST /schedules
   # POST /schedules.json
   # @block &&
   def create
     @schedule = Schedule.new(schedule_params)
     respond_to do |format|
-      if @schedule.save
+      if @block && @schedule.save
         format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully created.' }
         format.json { render status: :created, location: @schedule }
       else
-        format.html { render :new, notice: 'Erro ao cadastrar horário, conferir agenda do professor' }
+        format.html { render :new }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
     end
@@ -47,11 +49,11 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   # PATCH/PUT /schedules/1.json
   def update
     respond_to do |format|
-      if @schedule.update(schedule_params)
+      if @block && @schedule.update(schedule_params)
         format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully updated.' }
         format.json { render status: :ok, location: @schedule }
       else
-        format.html { render :edit, notice: 'Erro ao cadastrar horário, conferir agenda do professor' }
+        format.html { render :edit }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
     end
@@ -214,21 +216,38 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     schedules = Schedule.where(user_id: schedule_params[:user_id])
     schedules.each do |schedule|
       if schedule.weekday == schedule_params[:weekday]
-        unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
-          @block = false
-        end
-        unless schedule_params[:time] > schedule.time_end && schedule.time_end < schedule_params[:time_end]
-          @block = false
+        unless (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end]) || (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end])
+          unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
+            @block = false
+          end
+          unless schedule_params[:time] > schedule.time_end && schedule.time_end < schedule_params[:time_end]
+            @block = false
+          end
         end
       end
     end
   end
 
-  def student_class_conflict
-    students = schedule_params[:students_id]
-    students_with_class = Schedule.where(time: schedule_params[:time], weekday: schedule_params[:weekday])
-    students_with_class.each do |swc|
-      puts 'TO TESTANDO AQ OOOOOOO' if swc.students.to_s.include? students.to_s
+  def student_class_conflict(cl2)
+    Schedule.where(time: schedule_params[:time], weekday: schedule_params[:weekday]).each do |schedule|
+      ClassRoom.where(schedule_id: schedule.id).each do |cl1|
+        puts cl1.student_id
+        if cl1.student_id == cl2.student_id
+        #TODO: CRIAR UM MEIO DE FAZER UM POP UP PRA NOTIFICAR O ESTUDANTES
+        end
+      end
+    end
+  end
+
+  def student_class_conflict_on_update
+    ClassRoom.where(schedule_id: set_schedule).each do |cl2|
+      student_class_conflict(cl2)
+    end
+  end
+
+  def student_class_conflict_on_create
+    ClassRoom.where(schedule_id: Schedule.last.id).each do |cl2|
+      student_class_conflict(cl2)
     end
   end
 
