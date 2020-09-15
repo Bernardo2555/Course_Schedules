@@ -10,7 +10,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :time_validation, only: [:create, :update]
   before_action :group_validation, only: [:create]
   before_action :professor_class_time, only: [:create, :update]
-  before_action :student_class_conflict, only: [:create, :update]
+  # before_action :student_class_conflict, only: [:create, :update]
 
   # GET /schedules
   # GET /schedules.json
@@ -29,10 +29,11 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
 
   # POST /schedules
   # POST /schedules.json
+  # @block &&
   def create
     @schedule = Schedule.new(schedule_params)
     respond_to do |format|
-      if @block && @schedule.save
+      if @schedule.save
         format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully created.' }
         format.json { render status: :created, location: @schedule }
       else
@@ -46,7 +47,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   # PATCH/PUT /schedules/1.json
   def update
     respond_to do |format|
-      if @block && @schedule.update(schedule_params)
+      if @schedule.update(schedule_params)
         format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully updated.' }
         format.json { render status: :ok, location: @schedule }
       else
@@ -88,7 +89,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   # Only allow a list of trusted parameters through.
   def schedule_params
     params.require(:schedule).permit(:user_id, :course_id, :weekday,
-                                     :time, :time_end, :group, students: [])
+                                     :time, :time_end, :group, class_rooms_attributes: [:id, :student_id, :_destroy])
   end
 
   def verify_time
@@ -224,7 +225,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   end
 
   def student_class_conflict
-    students = schedule_params[:students]
+    students = schedule_params[:students_id]
     students_with_class = Schedule.where(time: schedule_params[:time], weekday: schedule_params[:weekday])
     students_with_class.each do |swc|
       puts 'TO TESTANDO AQ OOOOOOO' if swc.students.to_s.include? students.to_s

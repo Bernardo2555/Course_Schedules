@@ -17,7 +17,7 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create schedule" do
     assert_difference('Schedule.count') do
-      post schedules_url, params: { schedule: {course_id: @schedule.course_id, user_id: @schedule.professor_id, students: @schedule.students, time: @schedule.time, weekday: @schedule.weekday } }
+      post schedules_url, params: { schedule: {course_id: @schedule.course_id, user_id: @schedule.professor_id, students_id: @schedule.students, time: @schedule.time, weekday: @schedule.weekday } }
     end
 
     assert_redirected_to schedule_url(Schedule.last)
@@ -34,7 +34,7 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update schedule" do
-    patch schedule_url(@schedule), params: { schedule: {course_id: @schedule.course_id, user_id: @schedule.professor_id, students: @schedule.students, time: @schedule.time, weekday: @schedule.weekday } }
+    patch schedule_url(@schedule), params: { schedule: {course_id: @schedule.course_id, user_id: @schedule.professor_id, students_id: @schedule.students, time: @schedule.time, weekday: @schedule.weekday } }
     assert_redirected_to schedule_url(@schedule)
   end
 

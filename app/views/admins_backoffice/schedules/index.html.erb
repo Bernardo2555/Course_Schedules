@@ -7,7 +7,7 @@
   <tr>
     <th><%= @schedules.human_attribute_name(:professor) %></th>
     <th><%= @schedules.human_attribute_name(:course) %></th>
-    <th><%= @schedules.human_attribute_name(:students) %></th>
+    <th>Estudantes</th>
     <th><%= @schedules.human_attribute_name(:weekday) %></th>
     <th><%= @schedules.human_attribute_name(:group) %></th>
     <th><%= @schedules.human_attribute_name(:time) %></th>
@@ -21,7 +21,15 @@
     <tr>
       <td><%= User.find(schedule.user_id).description %></td>
       <td><%= Course.find(schedule.course_id).description %></td>
-      <td><%= schedule.students %></td>
+
+      <% if !ClassRoom.where(schedule_id: schedule.id).nil? %>
+        <td><% ClassRoom.where(schedule_id: schedule.id).each do |classroom| %>
+            <%= Student.find(classroom.student_id).description %>,</br>
+        <% end %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+
       <td><%= schedule.weekday %></td>
       <td><%= schedule.group %></td>
       <td><%= schedule.time %></td>

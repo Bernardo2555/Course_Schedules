@@ -3,7 +3,6 @@ class CreateSchedules < ActiveRecord::Migration[5.2]
     create_table :schedules do |t|
       t.references :user, polymorphic: true
       t.references :course, polymorphic: true
-      t.string :students
       t.string :weekday
       t.string :group
       t.string :time

@@ -22,9 +22,13 @@
     <%= form.select :course_id, @course_options, include_blank: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :students %>
-    <%= form.select :students, @student_options, {}, {multiple: true}%>
+
+  <div id="class_rooms">
+    <%= form.fields_for :class_rooms do |class_room| %>
+      <%= render partial: "class_room_fields", locals: {f: class_room} %>
+    <% end %>
+
+    <%= link_to_add_association "Adicionar aluno em dependência", form, :class_rooms %>
   </div>
 
   <div class="field">

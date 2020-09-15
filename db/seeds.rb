@@ -6,6 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+show_spinner("Seeding student to db...") do
+
+  students = ([
+      {ar: '12', description: 'Bernardo Pereira', year: '4'},
+      {ar: '13', description: 'Luiddy Souza', year: '4'},
+      {ar: '14', description: 'Milena Botelho', year: '3'},
+      {ar: '15', description: 'Abel Castro', year: '3'},
+  ])
+
+  students.each do |student|
+    Student.find_or_create_by!(student)
+  end
+end
+
 show_spinner("Seeding courses to db...") do
 
   courses = ([
@@ -69,7 +84,7 @@ show_spinner("Seeding courses to db...") do
       {description: 'Computação Móvel', code_c: '2772'},
       {description: 'Desenvolvimento de Sistemas Web', code_c: '2776'},
       {description: 'Design de Hardware', code_c: '2771'},
-      {description: 'Design de Integração Humano-Computador', code_c: '2782'},
+      {description: 'Design de Integração Humano-Computador'},
       {description: 'Geometria Computacional', code_c: '2781'},
       {description: 'Inglês Instrumental', code_c: '2775'},
       {description: 'Língua Brasileira de Sinais - LIBRAS', code_c: '2774'},
@@ -85,20 +100,6 @@ show_spinner("Seeding courses to db...") do
 
   courses.each do |course|
     Course.find_or_create_by!(course)
-  end
-end
-
-show_spinner("Seeding student to db...") do
-
-  students = ([
-      {ar: '12', description: 'Bernardo Pereira'},
-      {ar: '13', description: 'Luiddy Souza'},
-      {ar: '14', description: 'Milena Botelho'},
-      {ar: '15', description: 'Abel Castro'},
-  ])
-
-  students.each do |student|
-    Student.find_or_create_by!(student)
   end
 end
 

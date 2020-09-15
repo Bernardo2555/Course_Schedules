@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_174229) do
+ActiveRecord::Schema.define(version: 2020_09_14_213253) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 2020_07_15_174229) do
     t.index ["user_id"], name: "index_agendas_on_user_id"
   end
 
+  create_table "class_rooms", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "schedule_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedule_id"], name: "index_class_rooms_on_schedule_id"
+    t.index ["student_id"], name: "index_class_rooms_on_student_id"
+  end
+
   create_table "courses", primary_key: "code_c", force: :cascade do |t|
     t.string "description"
     t.integer "ideal_year"
@@ -59,7 +68,6 @@ ActiveRecord::Schema.define(version: 2020_07_15_174229) do
     t.integer "user_id"
     t.string "course_type"
     t.integer "course_id"
-    t.string "students"
     t.string "weekday"
     t.string "group"
     t.string "time"
@@ -72,8 +80,6 @@ ActiveRecord::Schema.define(version: 2020_07_15_174229) do
 
   create_table "students", primary_key: "ar", force: :cascade do |t|
     t.string "description"
-    t.string "email"
-    t.string "telephone"
     t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
