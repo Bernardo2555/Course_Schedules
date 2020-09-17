@@ -10,6 +10,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :time_validation, only: [:create, :update]
   before_action :group_validation, only: [:create]
   before_action :professor_class_time, only: [:create, :update]
+  before_action :no_change_time, only: [:update]
   before_action :student_class_conflict_on_update, only: [:update]
   after_action :student_class_conflict_on_create, only: [:create]
 
@@ -36,7 +37,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     @schedule = Schedule.new(schedule_params)
     respond_to do |format|
       if @block && @schedule.save
-        format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully created.' }
+        format.html { redirect_to admins_backoffice_schedules_path, notice: 'Horário foi criado com sucesso!' }
         format.json { render status: :created, location: @schedule }
       else
         format.html { render :new }
@@ -50,7 +51,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   def update
     respond_to do |format|
       if @block && @schedule.update(schedule_params)
-        format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully updated.' }
+        format.html { redirect_to admins_backoffice_schedules_path, notice: 'Horário foi atualizado com sucesso!' }
         format.json { render status: :ok, location: @schedule }
       else
         format.html { render :edit }
@@ -64,7 +65,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   def destroy
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to admins_backoffice_schedules_path, notice: 'Schedule was successfully destroyed.' }
+      format.html { redirect_to admins_backoffice_schedules_path, notice: 'Horário foi deletado com sucesso!' }
       format.json { head :no_content }
     end
   end
@@ -190,25 +191,37 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     @block = true
     unless @aux_time.nil?
       @aux_time.each_char do |t|
-        @block = false if t == @aux_week.to_s
+        if t == @aux_week.to_s
+          @block = false
+          @notice = "Confira a agenda do Professor #{User.find(schedule_params[:user_id]).description}"
+        end
       end
     end
     unless @aux_time_end.nil?
       @aux_time_end.each_char do |te|
-        @block = false if te == @aux_week.to_s
+        if te == @aux_week.to_s
+          @block = false
+          @notice = "Confira a agenda do Professor #{User.find(schedule_params[:user_id]).description}"
+        end
       end
     end
   end
 
   # @return [FalseClass, TrueClass]
   def time_validation
-    @block = false if schedule_params[:time] >= schedule_params[:time_end]
+    if schedule_params[:time] >= schedule_params[:time_end]
+      @block = false
+      @notice = 'Hora de início da aula não pode ser depois ou igual do fim da aula.'
+    end
   end
 
   def group_validation
     schedules = Schedule.where(course_id: schedule_params[:course_id])
     schedules.each do |schedule|
-      @block = false if schedule.group == schedule_params[:group]
+      if schedule.group == schedule_params[:group]
+        @block = false
+        @notice = "A turma #{schedule_params[:group]} já existe!"
+      end
     end
   end
 
@@ -216,16 +229,22 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     schedules = Schedule.where(user_id: schedule_params[:user_id])
     schedules.each do |schedule|
       if schedule.weekday == schedule_params[:weekday]
-        unless (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end]) || (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end])
+        unless (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end]) || (schedule_params[:time] < schedule.time_end && schedule.time_end > schedule_params[:time_end])
           unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
             @block = false
+            @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
           end
-          unless schedule_params[:time] > schedule.time_end && schedule.time_end < schedule_params[:time_end]
+          unless schedule_params[:time] >= schedule.time_end && schedule.time_end < schedule_params[:time_end]
             @block = false
+            @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
           end
         end
       end
     end
+  end
+
+  def no_change_time
+    @block = true if Schedule.find(set_schedule.id).time == schedule_params[:time] && Schedule.find(set_schedule.id).time_end == schedule_params[:time_end]
   end
 
   def student_class_conflict(cl2)
@@ -233,7 +252,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
       ClassRoom.where(schedule_id: schedule.id).each do |cl1|
         puts cl1.student_id
         if cl1.student_id == cl2.student_id
-        #TODO: CRIAR UM MEIO DE FAZER UM POP UP PRA NOTIFICAR O ESTUDANTES
+          @notice = "Aluno(a) #{Student.find(cl2.student_id).description} bate horário"
         end
       end
     end
@@ -246,8 +265,10 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   end
 
   def student_class_conflict_on_create
-    ClassRoom.where(schedule_id: Schedule.last.id).each do |cl2|
-      student_class_conflict(cl2)
+    unless Schedule.last.nil?
+      ClassRoom.where(schedule_id: Schedule.last.id).each do |cl2|
+        student_class_conflict(cl2)
+      end
     end
   end
 
