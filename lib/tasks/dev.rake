@@ -1,6 +1,6 @@
 namespace :dev do
   desc "Reload the db configuration for a development environment, drop > create > migrate > seed"
-  task setup: :environment, :production do
+  task setup: :environment do
     if Rails.env.development?
       show_spinner("Droping db...") { %x(rails db:drop:_unsafe) }
 

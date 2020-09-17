@@ -5,7 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Admin.create!(
+  email: 'admin@admin.com',
+  password: 123456,
+  password_confirmation: 123456
+)
 
+User.create!(
+  email: 'user@user.com',
+  password: 123456,
+  password_confirmation: 123456,
+  description: 'User',
+  telephone: '19 99999-9999',
+  ar: '123456',
+)
+
+Agenda.create!(
+  user_id: 1
+)
 
 show_spinner("Seeding student to db...") do
 
