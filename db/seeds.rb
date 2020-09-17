@@ -10,10 +10,18 @@
 show_spinner("Seeding student to db...") do
 
   students = ([
-      {ar: '12', description: 'Bernardo Pereira', year: '4'},
-      {ar: '13', description: 'Luiddy Souza', year: '4'},
-      {ar: '14', description: 'Milena Botelho', year: '3'},
-      {ar: '15', description: 'Abel Castro', year: '3'},
+      {ar: '112', description: 'Aluno1', year: '1'},
+      {ar: '113422', description: 'Aluno2', year: '1'},
+      {ar: '112532', description: 'Aluno3', year: '1'},
+      {ar: '1343156', description: 'Aluno4', year: '2'},
+      {ar: '11234543', description: 'Aluno5', year: '2'},
+      {ar: '14313', description: 'Aluno6', year: '2'},
+      {ar: '11244', description: 'Aluno7', year: '3'},
+      {ar: '113454', description: 'Aluno8', year: '3'},
+      {ar: '1123534', description: 'Aluno9', year: '3'},
+      {ar: '1123', description: 'Aluno10', year: '4'},
+      {ar: '113415', description: 'Aluno11', year: '4'},
+      {ar: '11325145', description: 'Aluno12', year: '4'},
   ])
 
   students.each do |student|
