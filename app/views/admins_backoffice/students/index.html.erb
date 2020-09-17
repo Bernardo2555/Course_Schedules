@@ -1,34 +1,38 @@
-<p id="notice"><%= notice %></p>
+<h1>Estudante</h1><br><br>
 
-<h1>Students</h1>
+<%= link_to new_admins_backoffice_student_path do %>
+  <i class="fa fa-plus"></i> Novo
+<% end %>
 
-<table>
-  <thead>
+<div class="x_content">
+  <table class="table table-striped">
+    <thead>
     <tr>
       <th><%= @students.human_attribute_name(:ar) %></th>
       <th><%= @students.human_attribute_name(:description) %></th>
-      <th><%= @students.human_attribute_name(:email) %></th>
-      <th><%= @students.human_attribute_name(:telephone) %></th>
       <th><%= @students.human_attribute_name(:year) %></th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @students.each do |student| %>
-      <tr>
+      <tr scope="row">
         <td><%= student.ar %></td>
         <td><%= student.description %></td>
-        <td><%= student.email %></td>
-        <td><%= student.telephone %></td>
         <td><%= student.year %></td>
-        <td><%= link_to t('links.edit'), edit_admins_backoffice_student_path(student) %></td>
-        <td><%= link_to t('links.delete'), admins_backoffice_student_path(student), method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+        <td>
+          <%= link_to edit_admins_backoffice_student_path(student) do %>
+            <i class="fa fa-pencil"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to admins_backoffice_student_path(student), method: :delete, data: {confirm: 'Você tem certeza?'} do %>
+            <i class="fa fa-minus"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to t('links.new'), new_admins_backoffice_student_path %>
+    </tbody>
+  </table>
+</div>

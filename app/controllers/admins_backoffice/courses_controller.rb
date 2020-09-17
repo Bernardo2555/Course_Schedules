@@ -23,7 +23,7 @@ class AdminsBackoffice::CoursesController < AdminsBackofficeController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to admins_backoffice_courses_path, notice: 'Course was successfully created.' }
+        format.html { redirect_to admins_backoffice_courses_path, notice: 'Matéria foi criada com sucesso!'}
         format.json { render status: :created, location: @course }
       else
         format.html { render :new }
@@ -37,7 +37,7 @@ class AdminsBackoffice::CoursesController < AdminsBackofficeController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to admins_backoffice_courses_path, notice: 'Course was successfully updated.' }
+        format.html { redirect_to admins_backoffice_courses_path, notice: 'Matéria foi atualizada com sucesso!' }
         format.json { render status: :ok, location: @course }
       else
         format.html { render :edit }
@@ -51,7 +51,7 @@ class AdminsBackoffice::CoursesController < AdminsBackofficeController
   def destroy
     @course.destroy
     respond_to do |format|
-      format.html { redirect_to admins_backoffice_courses_path, notice: 'Course was successfully destroyed.' }
+      format.html { redirect_to admins_backoffice_courses_path, notice: 'Matéria foi deletada com sucesso!' }
       format.json { head :no_content }
     end
   end

@@ -10,7 +10,7 @@ class UsersBackoffice::UsersController < UsersBackofficeController
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user, bypass: true)
-        format.html { redirect_to edit_users_backoffice_user_path( @user = User.find(current_user.id) ), notice: 'User was successfully updated.'}
+        format.html { redirect_to edit_users_backoffice_user_path( @user = User.find(current_user.id) ), notice: 'Professor(a) foi atualizado(a) com sucesso!'}
         format.json { render status: :ok, location: @users }
       else
         format.html { render :edit }

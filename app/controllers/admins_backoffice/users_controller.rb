@@ -22,7 +22,7 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
       if @user.save
         agenda = Agenda.new(user_id: User.last.id)
         agenda.save
-        format.html { redirect_to admins_backoffice_users_path, notice: 'Admin was successfully created.' }
+        format.html { redirect_to admins_backoffice_users_path, notice: 'Professor(a) foi craido(a) com sucesso!' }
         format.json { render status: :created, location: @user }
       else
         format.html { render :new }
@@ -34,7 +34,7 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to admins_backoffice_users_path, notice: 'User was successfully updated.' }
+        format.html { redirect_to admins_backoffice_users_path, notice: 'Professor(a) foi atualizado(a) com sucesso!' }
         format.json { render status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -46,7 +46,7 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to admins_backoffice_users_path, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to admins_backoffice_users_path, notice: 'Professor(a) foi deletado(a) com sucesso!' }
       format.json { head :no_content }
     end
   end

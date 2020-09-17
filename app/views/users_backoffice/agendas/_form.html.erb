@@ -1,127 +1,152 @@
-<%= form_with(model: [:users_backoffice, @agenda], local: true) do |form| %>
-  <% if agenda.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(agenda.errors.count, "error") %> prohibited this agenda from being saved:</h2>
-      <ul>
-        <% agenda.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<% if agenda.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(agenda.errors.count, "error") %> prohibited this agenda from being saved:</h2>
+    <ul>
+      <% agenda.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: [:users_backoffice, @agenda], local: true, class: "form-horizontal form-label-left") do |form| %>
+
+
+  <div class="x_content">
+    <table class="table table-striped">
+      <thead>
+      <th></th>
+      <th>Segunda-Feira</th>
+      <th>Terça-Feira</th>
+      <th>Quarta-Feira</th>
+      <th>Quinta-Feira</th>
+      <th>Sexta-Feira</th>
+      <th>Sabado</th>
+      </thead>
+
+      <tbody>
+      <tr scoped="row">
+        <td>07:30</td>
+        <% for i in 0..5 %>
+          <td>
+            <%= form.check_box :morning_one, {multiple: true}, i, false %>
+          </td>
         <% end %>
-      </ul>
+      </tr>
+
+      <tr scoped="row">
+        <td>08:20</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :morning_two, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>09:10</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :morning_three, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>10:10</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :morning_four, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>11:00</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :morning_five, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>13:20</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :afternoon_one, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>14:10</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :afternoon_two, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>15:00</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :afternoon_three, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>16:00</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :afternoon_four, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>16:50</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :afternoon_five, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>17:40</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :afternoon_six, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>18:30</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :evening_one, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>19:20</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :evening_two, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>20:30</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :evening_three, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>21:30</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :evening_four, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      <tr scoped="row">
+        <td>22:30</td>
+        <% for i in 0..5 %>
+          <td><%= form.check_box :evening_five, {multiple: true}, i, false %></td>
+        <% end %>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 offset-md-3">
+      <button type="submit" class="btn btn-success">Submit</button>
     </div>
-  <% end %>
-
-  <table>
-    <thead>
-    <th>Segunda-Feira</th>
-    <th>Terça-Feira</th>
-    <th>Quarta-Feira</th>
-    <th>Quinta-Feira</th>
-    <th>Sexta-Feira</th>
-    <th>Sabado</th>
-    </thead>
-
-    <tbody>
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :morning_one, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :morning_two, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :morning_three, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :morning_four, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :morning_five, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :afternoon_one, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :afternoon_two, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :afternoon_three, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :afternoon_four, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :afternoon_five, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :afternoon_six, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :evening_one, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :evening_two, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :evening_three, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :evening_four, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-    <tr>
-      <% for i in 0..5 %>
-        <td><%= form.check_box :evening_five, {multiple: true}, i, false %></td>
-      <% end %>
-    </tr>
-
-
-    </tbody>
-  </table>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
 <% end %>

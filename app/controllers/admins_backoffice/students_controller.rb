@@ -23,7 +23,7 @@ class AdminsBackoffice::StudentsController < AdminsBackofficeController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to admins_backoffice_students_path, notice: 'Student was successfully created.' }
+        format.html { redirect_to admins_backoffice_students_path, notice: 'Estudante foi craido(a) com sucesso!' }
         format.json { render status: :created, location: @student }
       else
         format.html { render :new }
@@ -37,7 +37,7 @@ class AdminsBackoffice::StudentsController < AdminsBackofficeController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to admins_backoffice_students_path, notice: 'Student was successfully updated.' }
+        format.html { redirect_to admins_backoffice_students_path, notice: 'Estudante foi atualizado(a) com sucesso!' }
         format.json { render status: :ok, location: @student }
       else
         format.html { render :edit }
@@ -51,7 +51,7 @@ class AdminsBackoffice::StudentsController < AdminsBackofficeController
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to admins_backoffice_students_path, notice: 'Student was successfully destroyed.' }
+      format.html { redirect_to admins_backoffice_students_path, notice: 'Estudante foi deletado(a) com sucesso!' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,6 @@ class AdminsBackoffice::StudentsController < AdminsBackofficeController
 
   # Only allow a list of trusted parameters through.
   def student_params
-    params.require(:student).permit(:ar, :description, :email, :telephone, :year)
+    params.require(:student).permit(:ar, :description, :year)
   end
 end

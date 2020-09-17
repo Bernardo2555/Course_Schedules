@@ -1,8 +1,11 @@
-<p id="notice"><%= notice %></p>
+<h1>Administradores</h1><br><br>
 
-<h1>Administradores</h1>
+<%= link_to new_admins_backoffice_admin_path do %>
+  <i class="fa fa-plus"></i> Novo
+<% end %>
 
-<table>
+<div class="x_content">
+  <table class="table table-striped">
   <thead>
   <tr>
     <th><%= @admins.human_attribute_name(:email) %></th>
@@ -12,15 +15,20 @@
 
   <tbody>
   <% @admins.each do |admin| %>
-    <tr>
+    <tr scope="row">
       <td><%= admin.email %></td>
-      <td><%= link_to t('links.edit'), edit_admins_backoffice_admin_path(admin) %></td>
-      <td><%= link_to t('links.delete'), admins_backoffice_admin_path(admin), method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+      <td>
+        <%= link_to edit_admins_backoffice_admin_path(admin) do %>
+          <i class="fa fa-pencil"></i>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to admins_backoffice_admin_path(admin), method: :delete, data: {confirm: 'Você tem certeza?'} do %>
+          <i class="fa fa-minus"></i>
+        <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to t('links.new'), new_admins_backoffice_admin_path %>
+</div>

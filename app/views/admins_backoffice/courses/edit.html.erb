@@ -1,5 +1,9 @@
-<h1>Editing Course</h1>
+<h1>Editando matéria</h1>
 
 <%= render 'form', course: @course %>
 
-<%= link_to t('links.back'), admins_backoffice_courses_path %>
+<div class="col-md-6 col-sm-6 offset-md-3">
+  <%= link_to admins_backoffice_courses_path do %>
+    <button class="btn btn-primary">Voltar</button>
+  <% end %>
+</div>

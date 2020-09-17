@@ -16,7 +16,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 #  app/assets
 Rails.application.config.assets.precompile += %w(application.css application.js
                                                   admins_backoffice.css admins_backoffice.js
-                                                  users_backoffice.css users_backoffice.js)
+                                                  users_backoffice.css users_backoffice.js
+                                                  login.css login.js)
 
 # lib/assets
 Rails.application.config.assets.precompile += %w(custom.css custom.js)

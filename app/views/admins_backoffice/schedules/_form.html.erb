@@ -1,57 +1,75 @@
-<%= form_with(model: [:admins_backoffice, @schedule], local: true) do |form| %>
-  <p id="notice"><%= notice %></p>
-  <% if schedule.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+<% if schedule.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
 
-      <ul>
-        <% schedule.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <ul>
+      <% schedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: [:admins_backoffice, @schedule], local: true, class: "form-horizontal form-label-left") do |form| %>
+
+  <div class="form-group">
+    <%= form.label :user_id, class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.select :user_id, @user_options, include_blank: true, class: "form-control col-md-7 col-xs-12" %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.select :user_id, @user_options, include_blank: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :course_id %>
-    <%= form.select :course_id, @course_options, include_blank: true %>
+  <div class="form-group">
+    <%= form.label :course_id, class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.select :course_id, @course_options, include_blank: true, class: "form-control col-md-7 col-xs-12" %>
+    </div>
   </div>
 
-
-  <div id="class_rooms">
-    <%= form.fields_for :class_rooms do |class_room| %>
-      <%= render partial: "class_room_fields", locals: {f: class_room} %>
-    <% end %>
-
-    <%= link_to_add_association "Adicionar aluno em dependência", form, :class_rooms %>
+  <div class="form-group">
+    <%= form.label :weekday, class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.select :weekday, ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'], include_blank: true, class: "form-control col-md-7 col-xs-12" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :weekday %>
-    <%= form.select :weekday, ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'], include_blank: true %>
+  <div class="form-group">
+    <%= form.label :group, class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.select :group, ['A', 'B', 'C', 'D'], include_blank: true, class: "form-control col-md-7 col-xs-12" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :group %>
-    <%= form.select :group, ['A', 'B', 'C', 'D'], include_blank: true %>
+  <div class="form-group">
+    <%= form.label :time, class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.select :time, ['07:30', '08:20', '09:10', '10:10', '11:00', '13:20', '14:10', '15:00', '16:00', '16:50', '17:40', '18:50', '19:40', '20:30', '21:30', '22:30'], include_blank: true, class: "form-control col-md-7 col-xs-12" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :time %>
-    <%= form.select :time, ['07:30', '08:20', '09:10', '10:10', '11:00', '13:20', '14:10', '15:00', '16:00', '16:50', '17:40', '18:50', '19:40', '20:30', '21:30', '22:30'], include_blank: true %>
+  <div class="form-group">
+    <%= form.label :time_end, class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.select :time_end, ['07:30', '08:20', '09:10', '10:10', '11:00', '13:20', '14:10', '15:00', '16:00', '16:50', '17:40', '18:50', '19:40', '20:30', '21:30', '22:30'], include_blank: true, class: "form-control col-md-7 col-xs-12" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :time_end %>
-    <%= form.select :time_end, ['07:30', '08:20', '09:10', '10:10', '11:00', '13:20', '14:10', '15:00', '16:00', '16:50', '17:40', '18:50', '19:40', '20:30', '21:30', '22:30'], include_blank: true %>
+  <div class="form-group">
+    <div id="class_rooms">
+      <%= form.fields_for :class_rooms, class: "control-label col-md-3 col-sm-3 col-xs-12" do |class_room| %>
+        <%= render partial: "class_room_fields", locals: {f: class_room} %>
+      <% end %>
+
+      <%= link_to_add_association form, :class_rooms do %>
+        <button class="btn btn-primary">Adicionar aluno em dependência</button>
+      <% end %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 offset-md-3">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
   </div>
 <% end %>

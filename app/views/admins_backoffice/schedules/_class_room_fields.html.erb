@@ -1,8 +1,13 @@
 <div class="nested-fields">
 
-  <%= f.label :student_id %>
-  <%= f.select :student_id, @student_options, include_blank: true %>
+  <div class="form-group">
+    <%= f.label :student_id, class: "control-label col-md-3 col-sm-3 col-xs-12"%>
+    <div class="col-md-6 col-sm-6 col-xs-12" >
+      <%= f.select :student_id, @student_options, include_blank: true %>   <%= link_to_remove_association('Remover', f) %>
+    </div>
+  </div>
 
-  <%= link_to_remove_association('Remover', f) %>
+
+
 
 </div>

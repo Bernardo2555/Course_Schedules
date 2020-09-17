@@ -8,3 +8,4 @@
 # = require malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar
 # = require custom
 # = require cocoon
+# = require bootstrap-growl-ifightcrime/jquery.bootstrap-growl.js

@@ -19,7 +19,7 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
 
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to admins_backoffice_admins_path, notice: 'Admin was successfully created.' }
+        format.html { redirect_to admins_backoffice_admins_path, notice: 'Administrador(a) foi craido(a) com sucesso!' }
         format.json { render status: :created, location: @admin }
       else
         format.html { render :new }
@@ -31,7 +31,7 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
   def update
     respond_to do |format|
       if @admin.update(admin_params)
-        format.html { redirect_to admins_backoffice_admins_path, notice: 'Admin was successfully updated.' }
+        format.html { redirect_to admins_backoffice_admins_path, notice: 'Administrador(a) foi atualizado(a) com sucesso!' }
         format.json { render status: :ok, location: @admin }
       else
         format.html { render :edit }
@@ -43,7 +43,7 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
   def destroy
     @admin.destroy
     respond_to do |format|
-      format.html { redirect_to admins_backoffice_admins_path, notice: 'Admin was successfully destroyed.' }
+      format.html { redirect_to admins_backoffice_admins_path, notice: 'Administrador(a) foi deletado(a) com sucesso!' }
       format.json { head :no_content }
     end
   end
@@ -51,8 +51,8 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
   private
 
   def verify_password
-    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-      params[:user].extract!(:password, :password_confirmation)
+    if params[:admin][:password].blank? && params[:admin][:password_confirmation].blank?
+      params[:admin].extract!(:password, :password_confirmation)
     end
   end
 
