@@ -2,10 +2,15 @@
 <ul>
 
   <li>
-    <%= link_to "LogIn Professor", users_backoffice_welcome_index_path %>
+    <%= link_to admins_backoffice_welcome_index_path do %>
+      <buttonclass class="btn btn-primary">Chefia do departamento</buttonclass>
+    <% end %>
   </li>
+
   <li>
-    <%= link_to "LogIn Chefe do departamento", admins_backoffice_welcome_index_path %>
+    <%= link_to users_backoffice_welcome_index_path do %>
+      <buttonclass class="btn btn-primary">Professores</buttonclass>
+    <% end %>
   </li>
 
 </ul>

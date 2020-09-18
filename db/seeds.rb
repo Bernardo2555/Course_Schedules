@@ -8,13 +8,13 @@
 
 
 
-Admin.create!(
+Admin.find_or_create_by!(
   email: 'admin@admin.com',
   password: 123456,
   password_confirmation: 123456
 )
 
-User.create!(
+User.find_or_create_by!(
   email: 'user@user.com',
   password: 123456,
   password_confirmation: 123456,
@@ -23,7 +23,7 @@ User.create!(
   ar: '123456',
 )
 
-Agenda.create!(
+Agenda.find_or_create_by!(
   user_id: 1
 )
 
@@ -58,13 +58,13 @@ show_spinner("Seeding courses to db...") do
       {description: 'Lógica para Computação', code_c: '2305', ideal_year: '1'},
       {description: 'Organização de Computadores', code_c: '2306', ideal_year: '1'},
       {description: 'Pré-Cálculo', code_c: '2307', ideal_year: '1'},
-      {description: 'Programação de Coputadores I', code_c: '2308', ideal_year: '1'},
+      {description: 'Programação de Computadores I', code_c: '2308', ideal_year: '1'},
       {description: 'Álgebra Linear', code_c: '2309', ideal_year: '1'},
-      {description: 'Calculo I', code_c: '2310', ideal_year: '1'},
+      {description: 'Cálculo I', code_c: '2310', ideal_year: '1'},
       {description: 'Fundamentos Matemáticos para Computação', code_c: '2311', ideal_year: '1'},
       {description: 'Introdução à Ciência da Computação II', code_c: '2312', ideal_year: '1'},
       {description: 'Lógica Digital', code_c: '2313', ideal_year: '1'},
-      {description: 'Programação de Coputadores II', code_c: '2314', ideal_year: '1'},
+      {description: 'Programação de Computadores II', code_c: '2314', ideal_year: '1'},
       {description: 'Sistemas de Informação', code_c: '2315', ideal_year: '1'},
 
       {description: 'Algoritmos e Estrututas de Dados I', code_c: '2316', ideal_year: '2'},
