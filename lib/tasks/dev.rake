@@ -8,45 +8,11 @@ namespace :dev do
 
       show_spinner("Migrating db...") { %x(rails db:migrate) }
 
-      show_spinner("Creating admin...") { %x(rails dev:add_default_admin) }
-
-      show_spinner("Creating user...") { %x(rails dev:add_default_user) }
-
-      show_spinner("Creating agenda...") { %x(rails dev:add_default_agenda) }
-
       %x(rails db:seed)
 
     else
       puts "You are not in a development enviroment!"
     end
-  end
-
-  desc "Adiciona o administrador padrão"
-  task add_default_admin: :environment do
-    Admin.create!(
-        email: 'admin@admin.com',
-        password: 123456,
-        password_confirmation: 123456
-    )
-  end
-
-  desc "Adiciona o usuário padrão"
-  task add_default_user: :environment do
-    User.create!(
-        email: 'user@user.com',
-        password: 123456,
-        password_confirmation: 123456,
-        description: 'User',
-        telephone: '19 99999-9999',
-        ar: '123456',
-    )
-  end
-
-  desc "Adiciona a agenda do usuário padrão"
-  task add_default_agenda: :environment do
-    Agenda.create!(
-        user_id: 1
-    )
   end
 
   private

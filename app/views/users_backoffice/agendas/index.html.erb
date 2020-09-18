@@ -21,9 +21,11 @@
     <tbody>
     <tr>
       <td>07:30</td>
-      <% for i in (0..5) %>
-        <% @agendas.morning_one.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.morning_one.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.morning_one.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -45,9 +47,11 @@
 
     <tr>
       <td>08:20</td>
-      <% for i in (0..5) %>
-        <% @agendas.morning_two.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.morning_two.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.morning_two.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -69,9 +73,11 @@
 
     <tr>
       <td>09:10</td>
-      <% for i in (0..5) %>
-        <% @agendas.morning_three.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.morning_three.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.morning_three.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -94,9 +100,11 @@
 
     <tr>
       <td>10:10</td>
-      <% for i in (0..5) %>
-        <% @agendas.morning_four.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.morning_four.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.morning_four.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -118,9 +126,11 @@
 
     <tr>
       <td>11:00</td>
-      <% for i in (0..5) %>
-        <% @agendas.morning_five.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.morning_five.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.morning_five.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -142,9 +152,11 @@
 
     <tr>
       <td>13:20</td>
-      <% for i in (0..5) %>
-        <% @agendas.afternoon_one.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.afternoon_one.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.afternoon_one.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -166,9 +178,11 @@
 
     <tr>
       <td>14:10</td>
-      <% for i in (0..5) %>
-        <% @agendas.afternoon_two.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.afternoon_two.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.afternoon_two.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -190,9 +204,11 @@
 
     <tr>
       <td>15:00</td>
-      <% for i in (0..5) %>
-        <% @agendas.afternoon_three.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.afternoon_three.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.afternoon_three.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -214,9 +230,11 @@
 
     <tr>
       <td>16:00</td>
-      <% for i in (0..5) %>
-        <% @agendas.afternoon_four.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.afternoon_four.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.afternoon_four.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -238,9 +256,12 @@
 
     <tr>
       <td>16:50</td>
-      <% for i in (0..5) %>
-        <% @agendas.afternoon_five.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+
+      <% unless @agendas.afternoon_five.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.afternoon_five.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -262,9 +283,12 @@
 
     <tr>
       <td>17:40</td>
-      <% for i in (0..5) %>
-        <% @agendas.afternoon_six.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+
+      <% unless @agendas.afternoon_six.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.afternoon_six.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -286,9 +310,11 @@
 
     <tr>
       <td>18:30</td>
-      <% for i in (0..5) %>
-        <% @agendas.evening_one.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.evening_one.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.evening_one.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -310,9 +336,11 @@
 
     <tr>
       <td>19:20</td>
-      <% for i in (0..5) %>
-        <% @agendas.evening_two.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.evening_two.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.evening_two.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -334,9 +362,11 @@
 
     <tr>
       <td>20:30</td>
-      <% for i in (0..5) %>
-        <% @agendas.evening_three.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.evening_three.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.evening_three.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -358,9 +388,11 @@
 
     <tr>
       <td>21:30</td>
-      <% for i in (0..5) %>
-        <% @agendas.evening_four.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.evening_four.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.evening_four.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
@@ -382,9 +414,11 @@
 
     <tr>
       <td>22:30</td>
-      <% for i in (0..5) %>
-        <% @agendas.evening_five.each_char do |agen| %>
-          <% @check = true if agen == i.to_s %>
+      <% unless @agendas.evening_five.nil? %>
+        <% for i in (0..5) %>
+          <% @agendas.evening_five.each_char do |agen| %>
+            <% @check = true if agen == i.to_s %>
+          <% end %>
         <% end %>
 
         <% if @check %>
