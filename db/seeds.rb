@@ -112,7 +112,7 @@ show_spinner("Seeding courses to db...") do
       {description: 'Computação Móvel', code_c: '2772'},
       {description: 'Desenvolvimento de Sistemas Web', code_c: '2776'},
       {description: 'Design de Hardware', code_c: '2771'},
-      {description: 'Design de Integração Humano-Computador'},
+      {description: 'Design de Integração Humano-Computador', code_c: '2782'},
       {description: 'Geometria Computacional', code_c: '2781'},
       {description: 'Inglês Instrumental', code_c: '2775'},
       {description: 'Língua Brasileira de Sinais - LIBRAS', code_c: '2774'},
