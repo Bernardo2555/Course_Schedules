@@ -7,25 +7,28 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+show_spinner("Seeding admin to db...") do
+  Admin.create(
+      email: 'admin@admin.com',
+      password: 123456,
+      password_confirmation: 123456
+  )
+end
 
-Admin.find_or_create_by!(
-  email: 'admin@admin.com',
-  password: 123456,
-  password_confirmation: 123456
-)
+show_spinner("Seeding user to db...") do
+  User.create(
+      email: 'user@user.com',
+      password: 123456,
+      password_confirmation: 123456,
+      description: 'User',
+      telephone: '19 99999-9999',
+      ar: '123456',
+  )
 
-User.find_or_create_by!(
-  email: 'user@user.com',
-  password: 123456,
-  password_confirmation: 123456,
-  description: 'User',
-  telephone: '19 99999-9999',
-  ar: '123456',
-)
-
-Agenda.find_or_create_by!(
-  user_id: 1
-)
+  Agenda.create(
+      user_id: 1
+  )
+end
 
 show_spinner("Seeding student to db...") do
 
