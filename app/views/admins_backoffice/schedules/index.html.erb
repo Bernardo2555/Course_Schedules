@@ -28,8 +28,11 @@
         <% if !ClassRoom.where(schedule_id: schedule.id).nil? %>
           <td>
             <% ClassRoom.where(schedule_id: schedule.id).each do |classroom| %>
-              <%= Student.find(classroom.student_id).description %>,</br>
-            <% end %></td>
+              <% unless classroom.student_id.nil? %>
+                <%= Student.find(classroom.student_id).description %>,</br>
+              <% end %>
+            <% end %>
+          </td>
         <% else %>
           <td></td>
         <% end %>

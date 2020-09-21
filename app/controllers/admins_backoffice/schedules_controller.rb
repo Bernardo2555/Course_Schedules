@@ -3,6 +3,8 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :set_user_options, only: [:new, :create, :edit, :update]
   before_action :set_course_options, only: [:new, :create, :edit, :update]
   before_action :set_student_options, only: [:new, :create, :edit, :update]
+  before_action :set_notice_update, only: [:update]
+  before_action :set_notice_create, only: [:create]
   before_action :verify_time, only: [:create, :update]
   before_action :verify_time_end, only: [:create, :update]
   before_action :verify_day, only: [:create, :update]
@@ -12,7 +14,6 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :professor_class_time, only: [:create, :update]
   before_action :no_change_time, only: [:update]
   before_action :student_class_conflict_on_update, only: [:update]
-  after_action :student_class_conflict_on_create, only: [:create]
 
   # GET /schedules
   # GET /schedules.json
@@ -29,7 +30,6 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   def edit
   end
 
-  #TODO: criar notificaçao pra n criaçao do horario
   # POST /schedules
   # POST /schedules.json
   # @block &&
@@ -37,7 +37,8 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     @schedule = Schedule.new(schedule_params)
     respond_to do |format|
       if @block && @schedule.save
-        format.html { redirect_to admins_backoffice_schedules_path, notice: 'Horário foi criado com sucesso!' }
+        student_class_conflict_on_create
+        format.html { redirect_to admins_backoffice_schedules_path, notice: @notice }
         format.json { render status: :created, location: @schedule }
       else
         format.html { render :new }
@@ -51,7 +52,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   def update
     respond_to do |format|
       if @block && @schedule.update(schedule_params)
-        format.html { redirect_to admins_backoffice_schedules_path, notice: 'Horário foi atualizado com sucesso!' }
+        format.html { redirect_to admins_backoffice_schedules_path, notice: @notice }
         format.json { render status: :ok, location: @schedule }
       else
         format.html { render :edit }
@@ -71,6 +72,14 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   end
 
   private
+
+  def set_notice_create
+    @notice = 'Horário foi criado com sucesso!'
+  end
+
+  def set_notice_update
+    @notice = 'Horário foi atualizado com sucesso!'
+  end
 
   def set_user_options
     @user_options = User.all.pluck(:description, :id)
@@ -207,7 +216,6 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     end
   end
 
-  # @return [FalseClass, TrueClass]
   def time_validation
     if schedule_params[:time] >= schedule_params[:time_end]
       @block = false
@@ -218,7 +226,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   def group_validation
     schedules = Schedule.where(course_id: schedule_params[:course_id])
     schedules.each do |schedule|
-      if schedule.group == schedule_params[:group]
+      if schedule.group == schedule_params[:group] && schedule.time == schedule_params[:time] && schedule.time_end == schedule_params[:time_end]
         @block = false
         @notice = "A turma #{schedule_params[:group]} já existe!"
       end
@@ -229,14 +237,16 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     schedules = Schedule.where(user_id: schedule_params[:user_id])
     schedules.each do |schedule|
       if schedule.weekday == schedule_params[:weekday]
-        unless (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end]) || (schedule_params[:time] < schedule.time_end && schedule.time_end > schedule_params[:time_end])
-          unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
-            @block = false
-            @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
-          end
-          unless schedule_params[:time] >= schedule.time_end && schedule.time_end < schedule_params[:time_end]
-            @block = false
-            @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
+        unless schedule_params[:time] == schedule.time && schedule_params[:time_end] == schedule.time_end
+          unless (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end]) || (schedule_params[:time] < schedule.time_end && schedule.time_end > schedule_params[:time_end])
+            unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
+              @block = false
+              @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
+            end
+            unless schedule_params[:time] >= schedule.time_end && schedule.time_end < schedule_params[:time_end]
+              @block = false
+              @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
+            end
           end
         end
       end
@@ -250,9 +260,10 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   def student_class_conflict(cl2)
     Schedule.where(time: schedule_params[:time], weekday: schedule_params[:weekday]).each do |schedule|
       ClassRoom.where(schedule_id: schedule.id).each do |cl1|
-        puts cl1.student_id
-        if cl1.student_id == cl2.student_id
-          @notice = "Aluno(a) #{Student.find(cl2.student_id).description} bate horário"
+        unless cl1.schedule == cl2.schedule
+          if cl1.student_id == cl2.student_id
+            @notice = "Aluno(a) #{Student.find(cl2.student_id).description} bate horário"
+          end
         end
       end
     end
@@ -265,7 +276,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   end
 
   def student_class_conflict_on_create
-    unless Schedule.last.nil?
+    unless Schedule.nil?
       ClassRoom.where(schedule_id: Schedule.last.id).each do |cl2|
         student_class_conflict(cl2)
       end
