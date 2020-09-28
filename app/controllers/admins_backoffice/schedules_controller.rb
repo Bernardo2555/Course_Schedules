@@ -11,6 +11,7 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :agenda_validation, only: [:create, :update]
   before_action :time_validation, only: [:create, :update]
   before_action :group_validation, only: [:create]
+  before_action :class_schedule, only: [:create]
   before_action :professor_class_time, only: [:create]
   before_action :update_professor_class_time, only: [:update]
   before_action :no_change_time, only: [:update]
@@ -225,11 +226,29 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   end
 
   def group_validation
-    schedules = Schedule.where(course_id: schedule_params[:course_id])
-    schedules.each do |schedule|
+    Schedule.where(course_id: schedule_params[:course_id]).each do |schedule|
       if schedule.group == schedule_params[:group] && schedule.time == schedule_params[:time] && schedule.time_end == schedule_params[:time_end]
         @block = false
-        @notice = "A turma #{schedule_params[:group]} já existe!"
+        @notice = "A turma #{schedule_params[:group]} já existe neste horário!"
+      end
+    end
+  end
+
+  def class_schedule
+    Schedule.where(weekday: schedule_params[:weekday]).each do |schedule|
+      if (schedule.group.empty? || schedule_params[:group].empty?) && (Course.find(schedule.course_id).ideal_year == Course.find(schedule_params[:course_id]).ideal_year)
+        if schedule.weekday == schedule_params[:weekday]
+          unless (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end]) || (schedule_params[:time] < schedule.time_end && schedule.time_end > schedule_params[:time_end])
+            unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
+              @block = false
+              @notice = "Horário ocupado!"
+            end
+            unless schedule_params[:time] >= schedule.time_end && schedule.time_end < schedule_params[:time_end]
+              @block = false
+              @notice = "Horário ocupado!"
+            end
+          end
+        end
       end
     end
   end
