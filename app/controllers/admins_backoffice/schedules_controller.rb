@@ -11,7 +11,8 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
   before_action :agenda_validation, only: [:create, :update]
   before_action :time_validation, only: [:create, :update]
   before_action :group_validation, only: [:create]
-  before_action :professor_class_time, only: [:create, :update]
+  before_action :professor_class_time, only: [:create]
+  before_action :update_professor_class_time, only: [:update]
   before_action :no_change_time, only: [:update]
   before_action :student_class_conflict_on_update, only: [:update]
 
@@ -237,17 +238,26 @@ class AdminsBackoffice::SchedulesController < AdminsBackofficeController
     schedules = Schedule.where(user_id: schedule_params[:user_id])
     schedules.each do |schedule|
       if schedule.weekday == schedule_params[:weekday]
-        unless schedule_params[:time] == schedule.time && schedule_params[:time_end] == schedule.time_end
-          unless (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end]) || (schedule_params[:time] < schedule.time_end && schedule.time_end > schedule_params[:time_end])
-            unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
-              @block = false
-              @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
-            end
-            unless schedule_params[:time] >= schedule.time_end && schedule.time_end < schedule_params[:time_end]
-              @block = false
-              @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
-            end
+        unless (schedule_params[:time] < schedule.time && schedule.time > schedule_params[:time_end]) || (schedule_params[:time] < schedule.time_end && schedule.time_end > schedule_params[:time_end])
+          unless schedule_params[:time] > schedule.time && schedule.time < schedule_params[:time_end]
+            @block = false
+            @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
           end
+          unless schedule_params[:time] >= schedule.time_end && schedule.time_end < schedule_params[:time_end]
+            @block = false
+            @notice = "Confira os horários de aula do Professor #{User.find(schedule_params[:user_id]).description}"
+          end
+        end
+      end
+    end
+  end
+
+  def update_professor_class_time
+    schedules = Schedule.where(user_id: schedule_params[:user_id])
+    schedules.each do |schedule|
+      if schedule.weekday == schedule_params[:weekday]
+        unless schedule_params[:time] == schedule.time && schedule_params[:time_end] == schedule.time_end
+          professor_class_time
         end
       end
     end
