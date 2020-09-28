@@ -1,9 +1,9 @@
 class AdminsBackoffice::UsersController < AdminsBackofficeController
   before_action :set_user, only: [:edit, :update, :destroy]
   before_action :verify_password, only: [:update]
+  before_action :user_schedule, only: [:destroy]
 
 
-  
   def index
     @users = User.all
   end
@@ -44,10 +44,15 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
   end
 
   def destroy
-    @user.destroy
+    if @block
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to admins_backoffice_users_path, notice: @notice }
+        format.json { head :no_content }
+      end
+    end
     respond_to do |format|
-      format.html { redirect_to admins_backoffice_users_path, notice: 'Professor(a) foi deletado(a) com sucesso!' }
-      format.json { head :no_content }
+      format.html { redirect_to admins_backoffice_users_path, notice: @notice }
     end
   end
 
@@ -59,7 +64,7 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
     end
   end
 
-# Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
   end
@@ -67,5 +72,15 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
                                  :description, :telephone, :ar)
+  end
+
+  def user_schedule
+    if Schedule.find_by(user_id: @user).nil?
+      @block = true
+      @notice = "Professor(a) foi deletado(a) com sucesso!"
+    else
+      @block = false
+      @notice = "Professor(a) não pode ser deletado(a)! Verifique se o mesmo possui horários!"
+    end
   end
 end
