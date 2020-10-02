@@ -50,9 +50,10 @@ class AdminsBackoffice::UsersController < AdminsBackofficeController
         format.html { redirect_to admins_backoffice_users_path, notice: @notice }
         format.json { head :no_content }
       end
-    end
-    respond_to do |format|
-      format.html { redirect_to admins_backoffice_users_path, notice: @notice }
+    else
+      respond_to do |format|
+        format.html { redirect_to admins_backoffice_users_path, notice: @notice }
+      end
     end
   end
 
